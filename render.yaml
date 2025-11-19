@@ -1,9 +1,11 @@
 services:
-  - type: web
+  - type: static
     name: portfolio-site
-    env: node
+    plan: free
     buildCommand: npm install && npm run build
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
+    staticPublishPath: build
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
+    # React Router routes handled by _redirects file in public/
