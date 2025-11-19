@@ -1,0 +1,130 @@
+/* Project Page Styles */
+
+.project-page {
+  min-height: calc(100vh - 70px);
+}
+
+.project-header {
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-2xl) 0;
+  margin-top: 70px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  margin-bottom: var(--spacing-lg);
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-primary);
+}
+
+.project-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.project-content {
+  padding: var(--spacing-3xl) 0;
+  background: var(--color-bg-primary);
+}
+
+.project-html-content {
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+}
+
+/* Style the embedded HTML content */
+.project-html-content h1,
+.project-html-content h2,
+.project-html-content h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.project-html-content h1 {
+  font-size: var(--font-size-3xl);
+}
+
+.project-html-content h2 {
+  font-size: var(--font-size-2xl);
+}
+
+.project-html-content h3 {
+  font-size: var(--font-size-xl);
+}
+
+.project-html-content p {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.project-html-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) 0;
+  box-shadow: var(--shadow-md);
+}
+
+.project-html-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.project-html-content a:hover {
+  color: var(--color-primary-dark);
+}
+
+.project-html-content ul,
+.project-html-content ol {
+  margin: var(--spacing-lg) 0;
+  padding-left: var(--spacing-xl);
+}
+
+.project-html-content li {
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-secondary);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: var(--spacing-4xl) 0;
+}
+
+.loading-state p,
+.error-state p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-header {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .project-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .project-content {
+    padding: var(--spacing-2xl) 0;
+  }
+}
+
