@@ -1,0 +1,335 @@
+Home Page Summary (Project Card)
+
+SighedKick – My personal GenAI copilot (and playground)
+
+A constantly evolving GenAI workspace where I design, build, and stress-test how AI should actually plug into real workflows. I use SighedKick daily as my own copilot—storing prompts, shaping tone, and drafting everything from Slack messages to PRDs—while using the same system as a testbed for multi-LLM architectures, evals, and human–AI collaboration patterns.
+
+What it is: A personal GenAI copilot with three core surfaces today: a structured Prompt Library, a Tone Shift engine, and an AI-first Canvas workspace.
+
+Why it matters: It lets me prototype and live-test GenAI product patterns, model abstractions, and evaluation frameworks in my own work—so I learn GenAI systems by using something I’m actively building.
+
+My role: Principal PM + builder — product vision, UX systems, model-agnostic architecture, and implementation across frontend, backend, and LLM integrations.
+
+Status: In active daily use, evolving toward a model-agnostic evaluation and orchestration layer that picks the right LLM for each task.
+
+Project Detail Page
+Overview
+
+SighedKick is my personal GenAI copilot and experimentation lab—a place where I both do my work and design the systems that power it.
+
+I use it every day to:
+
+Store and reuse prompts and patterns
+
+Shape and refine tone across audiences
+
+Draft and iterate on everything from quick replies to long-form docs
+
+At the same time, I use SighedKick to prototype and test GenAI product patterns, multi-model architectures, and eval workflows. It’s a meta project: the tool I use to build better versions of itself.
+
+Type: Personal GenAI platform / experimentation environment
+
+Role: Principal Product Manager & hands-on builder (product, UX, systems design, implementation)
+
+Focus: GenAI systems, model-agnostic design, evaluations, human–AI workflows
+
+Status: Actively used and continuously evolving
+
+The Problem & Spark
+
+I didn’t just want to “use ChatGPT.”
+I wanted to understand how GenAI systems are built and what good actually looks like when AI is embedded in real, messy workflows.
+
+A few pain points pushed me into building SighedKick:
+
+Prompt fragility: Good prompts are hard-won, and too easy to lose in random docs and chats.
+
+No portability: It’s painful to move prompts, context, and patterns between providers and models.
+
+One-off tools: Most GenAI tools are narrow and closed—great for a single use case, not for understanding the system as a whole.
+
+Fast-moving landscape: New models ship constantly; I needed a way to test and switch without rebuilding everything each time.
+
+So I gave myself a constraint:
+
+Don’t just adopt GenAI tools. Build one that powers my real work and doubles as a systems lab.
+
+That’s SighedKick: a personal copilot I rely on every day, designed from the ground up to be model-agnostic, experiment-friendly, and workflow-first.
+
+What It Does Today
+
+Right now SighedKick is centered around three core modules: Prompt Library, Tone Shift, and Canvas. Each one started from a real personal need and evolved through daily use.
+
+1. Prompt Library – My single source of truth for AI interactions
+
+The Prompt Library is where all my GenAI “infrastructure” lives:
+
+Reusable prompts: Templates and patterns I’ve refined over time (e.g., interview prep, product critique, PRD scaffolds, architecture reviews).
+
+Context snippets: Frequently used background (product domains, teams, roles, personal bio, recurring projects).
+
+Prompt patterns: Structures for different jobs—analysis, brainstorming, writing, editing, role-play, etc.
+
+Model-agnostic templates: Prompts that are designed to behave predictably across different LLMs.
+
+What it gives me:
+
+Consistency – I don’t have to reinvent my best prompts every time I open a new model.
+
+Portability – I can carry the same patterns across providers and UIs.
+
+Speed – Spinning up a new workflow is often just picking a template and slotting in the specifics.
+
+Effectively, the Prompt Library is my “prompt operating system”—the shared layer that everything else in SighedKick pulls from.
+
+2. Tone Shift – Rapid tone exploration for any message
+
+Tone Shift started as a simple question:
+
+“What if I could see this same message in five different voices instantly?”
+
+It has since become my go-to tool for crafting communication in context.
+
+What Tone Shift does:
+
+Takes an initial draft (or even just a rough concept).
+
+Generates variations across tones and styles: professional, casual, direct, warm, diplomatic, etc.
+
+Lets me compare side-by-side and iterate quickly.
+
+Helps match tone to audience, medium, and stakes.
+
+Where I use it:
+
+Sensitive team updates and feedback
+
+Exec summaries, strategy notes, product announcements
+
+“High-risk” emails and Slack messages where tone really matters
+
+Tone Shift has become a kind of safety rail + amplifier: it keeps me from stepping on tone landmines and helps me reach a voice that’s clear, kind, and effective without endless manual rewrites.
+
+3. Canvas – My primary GenAI workspace
+
+Canvas is the heart of SighedKick and the surface I now start almost everything in.
+
+Think of it as an AI-augmented workspace where I can bring in any text—emails, Slack threads, docs, notes—and then analyze, restructure, and draft until I have something I’m happy with.
+
+What Canvas does:
+
+Message analysis: Understands incoming content—what is being asked, who the audience is, what constraints exist.
+
+Draft preparation: Helps outline and then fill in responses, from short replies to long-form docs.
+
+Document iteration: Rapidly refines PRDs, launch posts, retros, interview writeups, and more.
+
+Flexible workflows: Supports everything from informal Slack drafts to formal communication, all in one surface.
+
+My current workflow:
+
+A complex email or Slack thread comes in → I paste or sync it into Canvas.
+
+Canvas breaks down what’s going on and suggests structure for a response.
+
+I iterate: tweak tone, clarify arguments, reorder sections.
+
+When I’m ready, I copy the final version out to its destination.
+
+What makes Canvas powerful is its flexibility: it doesn’t force a single pattern. Instead, it adapts to whatever I’m doing—structuring my thinking when I’m stuck, tightening language when I’m verbose, or just handling busywork edits when I’m tired.
+
+Where It’s Going: Future Vision
+
+The next major evolution of SighedKick is toward a model-agnostic evaluation and orchestration layer—essentially, a way to continuously answer:
+
+“Which model is best for this specific job right now?”
+
+1. Multi-LLM Integration & Comparative Evaluation
+
+Planned capabilities:
+
+Multi-LLM integration: Connect SighedKick to multiple providers (OpenAI, Anthropic, Google, open-source models, etc.).
+
+Parallel runs: Send the same prompt + context to multiple models simultaneously.
+
+Comparative analysis: Compare outputs on:
+
+Quality and relevance
+
+Style and tone
+
+Speed and latency
+
+Cost per request
+
+Accuracy for my specific workflows
+
+This becomes a personal eval framework tuned to my real tasks (product writing, analysis, strategy, code review, etc.), not abstract benchmarks.
+
+2. Eval Framework & Metrics
+
+Define task-specific eval sets (e.g., “rewrite this feedback more constructively,” “summarize this PRD for execs,” “extract key risks from this plan”).
+
+Score model outputs based on what success actually looks like for those tasks.
+
+Track performance and cost over time as models change.
+
+3. Dynamic Model Selection
+
+With those evals in place, SighedKick can:
+
+Recommend which model to use for which feature (Tone Shift, Canvas drafting, summarization, code analysis, etc.).
+
+Make it easy to switch providers as better models emerge without rewriting the entire product.
+
+Preserve optionalility: I’m never locked into a single vendor; the system is intentionally designed to adapt.
+
+Big picture: SighedKick becomes not just my copilot, but my model routing brain, helping me stay on the best-performing tools for what I actually do day-to-day.
+
+How I Built It (High-Level Architecture)
+
+SighedKick follows a fairly standard but deliberately model-agnostic GenAI architecture.
+
+Core Tech Shape
+
+Frontend: A modern single-page web app for interactive, responsive UX (Prompt Library, Tone Shift, Canvas, comparison views).
+
+Backend API: A server layer that handles:
+
+Authentication and user/session management
+
+Feature logic (prompt composition, tone configuration, Canvas workflows)
+
+Communication with one or more LLM providers
+
+LLM Integration: A common abstraction for calling different models via their SDKs/APIs.
+
+Database: Storage for prompts, contexts, feature configurations, and historical interactions.
+
+State Management: To keep UI, prompts, and model responses in sync across modules.
+
+(I can plug in the exact stack names here—React/Next, Django/FastAPI, specific DB, etc.—once the codebase is finalized for public sharing.)
+
+Architectural Principles
+
+Model Agnosticism
+
+All LLM calls flow through a single abstraction layer.
+
+Feature modules don’t care which provider is behind the scenes.
+
+Swapping out or adding a new model is a configuration change, not a refactor.
+
+Feature Modularity
+
+Prompt Library, Tone Shift, Canvas, and future Evals are structured as separate modules.
+
+They share common utilities (prompt templating, formatting, logging) but can evolve independently.
+
+This makes it easy to ship experimental changes in one area without destabilizing everything else.
+
+Rapid Iteration
+
+Loosely coupled components support fast refactors as my mental model of “good GenAI UX” evolves.
+
+Feature flags (or equivalent gating) allow me to test new flows without breaking my daily usage.
+
+Deployment is treated as continuous: the project is intentionally never “done.”
+
+Workflow-First Design
+
+Every feature started as: “I hit this pain point repeatedly—what do I wish existed?”
+
+I dogfood each capability immediately, then refine based on actual friction I feel.
+
+Decisions are grounded in my real work (product docs, strategy, feedback, communication), not hypothetical demo use cases.
+
+System Flow
+
+At a high level, most interactions follow this pattern:
+
+User Input
+
+I start from a surface: Prompt Library, Tone Shift, or Canvas.
+
+Feature Module Logic
+
+The module pulls in stored prompts and context (if needed).
+
+It composes the full request to the LLM in a structured way.
+
+LLM Request
+
+The request is sent through the model-agnostic integration layer.
+
+The selected model (or models) generate a response.
+
+Response Processing
+
+The backend normalizes and post-processes the output.
+
+Results are formatted for the specific UI (single response, multiple tone variations, multi-model comparison, etc.).
+
+Storage & Reuse
+
+Relevant prompts, configurations, and sometimes outputs are stored for reuse, analytics, or later eval.
+
+Future eval architecture adds a parallel path:
+
+Eval Framework orchestrates parallel calls to multiple models.
+
+Outputs are aggregated, scored, and surfaced in a dedicated comparison UI.
+
+Metrics like quality, latency, and cost feed into model selection decisions.
+
+Outcomes
+
+SighedKick has had two big kinds of impact for me:
+
+1. Personal Productivity & Quality
+
+I now default to drafting everything in Canvas: PRDs, retros, interview prep, 1:1 notes, launch comms.
+
+Tone Shift helps de-risk sensitive communication and saves me from multiple “rewrite loops.”
+
+The Prompt Library keeps my best prompts and patterns organized and portable, which compounds over time.
+
+Result: I ship better writing, faster—with more consistency in style and clarity.
+
+2. GenAI Systems Fluency
+
+Building and using SighedKick has given me:
+
+Hands-on experience with LLM integration patterns, prompt architectures, and state management.
+
+A grounded sense of what good GenAI UX feels like vs. just calling an API.
+
+A live environment for experimenting with:
+
+Model-agnostic design
+
+Evaluation workflows
+
+Prompt libraries and context stores
+
+Human–AI interaction patterns over time
+
+For my work as a Principal PM, this means I’m not just “using AI tools”—I’m actively designing and validating the systems behind them.
+
+Reflection
+
+SighedKick is intentionally never “finished.” It’s a live, evolving proof-of-concept for:
+
+How a personal copilot should behave,
+
+How to design for a multi-model future, and
+
+How to integrate GenAI in a way that actually respects real workflows.
+
+By building the thing I use to do my work, I get a tight, honest feedback loop: if something is clunky, I feel it immediately. If something is magical, I lean on it harder. That cycle is what drives the next set of ideas.
+
+Tagline:
+
+SighedKick — a personal GenAI copilot, and a lab for what AI-powered work can become.
+
+DemoLink:https://www.loom.com/share/349fa5d6c4dd42d2816e2c61a6d0e8cb

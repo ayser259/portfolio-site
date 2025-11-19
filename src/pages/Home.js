@@ -85,6 +85,56 @@ const Home = () => {
       link: '/canadian_economy',
       external: false,
       tags: ['Data Analysis', 'Economics']
+    },
+    {
+      id: 'sighedkick',
+      title: 'SighedKick',
+      category: 'pm',
+      description: 'My personal GenAI copilot and playground. A constantly evolving workspace where I design, build, and stress-test how AI should actually plug into real workflows.',
+      image: '/projects/Sighedkick/Sighedkick-Canvas1.png',
+      link: '/sighedkick',
+      external: false,
+      tags: ['Product Management', 'GenAI', 'Full Stack']
+    },
+    {
+      id: 'byteme',
+      title: 'ByteMe',
+      category: 'development',
+      description: 'A native iOS nutrition tracker that borrows patterns from financial monitoring—turning daily food logging into a clean, insight-driven experience.',
+      image: '/projects/ByteMe/ByteMe-Dashboard1.png',
+      link: '/byteme',
+      external: false,
+      tags: ['iOS Development', 'Swift', 'Product Design']
+    },
+    {
+      id: 'emptymyinbox',
+      title: 'Empty my Inbox',
+      category: 'development',
+      description: 'A unified email productivity tool that pulls multiple Gmail accounts into one fast, opinionated interface, designed to make Inbox Zero achievable every day.',
+      image: '/projects/EmptyMyInbox/EmptyMyInbox-Home.png',
+      link: '/emptymyinbox',
+      external: false,
+      tags: ['Full Stack', 'Django', 'React', 'Productivity']
+    },
+    {
+      id: 'prdsystem',
+      title: 'AI-Assisted PRD Workflow',
+      category: 'pm',
+      description: 'A lightweight, GenAI-powered workflow that turns messy, spoken ideas into clean, structured PRDs—from brain dump to update-ready doc in under an hour.',
+      image: '/images/yotta.png', // Placeholder - no image available
+      link: '/prdsystem',
+      external: false,
+      tags: ['Product Management', 'GenAI', 'Workflow Design']
+    },
+    {
+      id: 'ckfd',
+      title: 'Financial Wellness Demos',
+      category: 'development',
+      description: 'An interactive React demo that simulates a full financial wellness experience: credit scores, cash flow, education, gamification, and personalized insights.',
+      image: '/images/yotta.png', // Placeholder - no image available
+      link: '/ckfd',
+      external: false,
+      tags: ['React', 'TypeScript', 'Product Prototyping']
     }
   ];
 

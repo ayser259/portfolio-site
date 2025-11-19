@@ -1,0 +1,229 @@
+Home Page Summary (Project Card)
+
+AI-Assisted PRD Workflow – From brain dump to structured doc
+
+A lightweight, GenAI-powered workflow I designed to turn messy, spoken ideas into clean, structured PRDs. The system combines voice transcripts, targeted AI prompts, and guided refinement so PMs can go from “I have a half-formed idea” to “I have an update-ready PRD” in under an hour—without staring at a blank doc.
+
+What it is: A 3-step flow that uses voice memos + custom SighedKick prompts to capture raw thinking, clarify the problem space, and generate PRD-quality drafts.
+
+Why it matters: It reduces the blank-page tax, scales my thinking to others, and standardizes how we turn fuzzy ideas into well-formed product docs.
+
+My role: Designed the workflow, wrote the prompt systems, and rolled it into my own and my team’s PRD habits.
+
+Status: In active use as my default way to create & update PRDs; easily adaptable for specs, strategy docs, and one-pagers.
+
+Project Detail Page
+Overview
+
+This “project” isn’t an app — it’s a workflow.
+
+I designed an AI-assisted flow for updating PRDs that turns raw, spoken ideas into structured documents using:
+
+A voice memo brain dump
+
+A guided AI conversation to unpack and sharpen the idea
+
+A PRD-generation prompt that turns everything into a well-structured doc
+
+The goal: make it dramatically easier (and faster) for PMs to go from “I have a concept in my head” to “I have a PRD I can share and iterate on.”
+
+The Problem
+
+Traditional PRD writing has a few recurring pain points:
+
+Blank-page paralysis – Staring at a template with empty sections is slow and demotivating.
+
+Fragmented context – Background, member problem, business problem, and solution ideas often live in Slack threads, random docs, and people’s heads.
+
+High switching cost – Capturing everything in polished written form is cognitively heavy, especially when you’re still figuring out the idea.
+
+Hard to scale thinking – When you’re a principal PM, a lot of value is in your mental model of a space. Getting that out of your head in a repeatable way is non-trivial.
+
+I wanted a flow that:
+
+Let me think out loud instead of writing from scratch
+
+Used GenAI as a structured thought partner, not just a text generator
+
+Produced PRD-ready material I could drop into our canonical docs
+
+Was simple enough that other PMs could copy it
+
+The Solution: A 3-Step AI-Assisted PRD Flow
+Step 1 – Create a transcript of your idea
+
+Goal: Capture everything in your head without editing yourself.
+
+Open a voice memo / recorder.
+
+Talk as if you’re explaining this to a new teammate who needs to run with it while you’re on PTO.
+
+Cover these beats explicitly:
+
+Background of the product area
+
+The member problem you’re trying to solve
+
+The business problem you’re trying to solve
+
+Any relevant context (history, constraints, dependencies, previous attempts)
+
+How you want to solve it – early solution ideas, hypotheses, directions
+
+When you’re done, save the recording and copy the transcript (from your phone or transcription tool).
+
+This step deliberately optimizes for speed and completeness, not polish. It’s easier to talk for 10–20 minutes than to write for an hour.
+
+Step 2 – Elevate the idea (Guided AI conversation)
+
+Goal: Turn the raw dump into a sharper, more complete concept by letting AI interrogate it.
+
+Take your transcript and paste it into a custom SighedKick prompt (your “Elevate the Idea” flow).
+
+Start the conversation: the prompt asks structured questions about:
+
+Member problem
+
+Business problem
+
+Success metrics
+
+Constraints, risks, and open questions
+
+Edge cases and dependencies
+
+For each question:
+
+If it’s relevant, answer it directly, adding more context.
+
+If it’s not relevant, explicitly say “not relevant for this idea, please skip” and move on.
+
+Keep going until:
+
+You’ve filled in the obvious gaps
+
+You feel like you’re not adding much new information anymore
+
+The conversation history reads like a solid, structured understanding of the problem and approach
+
+This step essentially replaces a chaotic internal monologue with a guided interrogation, so by the end you’ve pressure-tested and sharpened your idea without manually outlining everything yourself.
+
+Step 3 – Generate the PRD draft
+
+Goal: Convert the enriched conversation into a structured document you can tweak and ship.
+
+Copy the full conversation history from Step 2 (your transcript + all Q&A).
+
+Paste it into your second SighedKick prompt (the “Generate Document / PRD” flow).
+
+The prompt turns that history into a structured doc, typically with sections like:
+
+Background / Context
+
+Member Problem
+
+Business Problem & Opportunity
+
+Goals & Success Metrics
+
+Proposed Solution & Scope
+
+Out of Scope
+
+Dependencies & Risks
+
+Open Questions / Next Steps
+
+Read through the generated doc and give targeted feedback:
+
+“Tighten the background section.”
+
+“Add more detail on risks.”
+
+“Shorten the proposed solution section by 30%.”
+
+“Make the tone more concise and executive-ready.”
+
+Once you’re happy:
+
+Copy it section by section into your canonical PRD tool (Confluence, Google Docs, Notion, etc.).
+
+Continue editing there if needed, or loop back through AI for small tweaks.
+
+At the end, you have a clean PRD draft that:
+
+Reflects your actual thinking
+
+Follows a consistent structure
+
+Took significantly less time than writing from scratch
+
+How It Fits in My Work
+
+This flow is now my default for:
+
+New PRD drafts
+
+Major PRD revisions or rewrites
+
+Strategy one-pagers
+
+Longer, structured write-ups (launch plans, retros, proposals)
+
+It also scales nicely:
+
+Other PMs can use the same 3-step pattern with their own recordings.
+
+The prompts can be adapted to different templates (e.g., BRDs, experiment briefs, strategy docs).
+
+It standardizes how we think about member vs business problems, metrics, and scope.
+
+Design Principles Behind the Flow
+
+Talk first, write later
+
+Humans are often faster and more natural when speaking than typing.
+
+Voice-first capture reduces the friction of starting.
+
+AI as a structured interviewer
+
+Instead of “write me a PRD,” the model acts like a thoughtful partner asking the right follow-ups.
+
+This keeps you in control while still benefiting from AI’s structure.
+
+Separation of thinking vs document creation
+
+Step 2 is about thinking and refining.
+
+Step 3 is about formatting and presenting.
+
+Repeatable, not one-off
+
+The links/prompts and instructions are reusable.
+
+The flow doesn’t depend on you having a “good writing day.”
+
+Impact & Outcomes
+
+For me personally, this workflow has:
+
+Cut the time to go from rough idea → PRD draft by a meaningful margin.
+
+Reduced the blank page anxiety of starting big docs.
+
+Improved clarity: the Q&A phase surfaces missing context, misaligned assumptions, and fuzzy problem statements.
+
+Made it easier to keep PRDs fresh, since updates can start from a quick voice memo instead of rewriting from scratch.
+
+At a principal level, it’s also a way to:
+
+Codify my approach to problem framing and PRD structure.
+
+Make that approach transferable to other PMs via prompts and process, not just ad hoc coaching.
+
+Demonstrate concrete ways I embed GenAI into team workflows rather than just talking about AI in the abstract.
+
+How I Describe It in One Line
+
+A reusable, AI-assisted workflow that turns spoken idea dumps into clean, structured PRDs—so PMs can spend more time thinking and less time wrestling with a blank document.

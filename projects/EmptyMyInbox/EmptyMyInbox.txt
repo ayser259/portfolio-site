@@ -1,0 +1,270 @@
+Home Page Summary (Project Card)
+
+Empty my Inbox – A systems-first path to Inbox Zero
+
+A unified email productivity tool that pulls multiple Gmail accounts into one fast, opinionated interface, designed to make Inbox Zero something you can actually hit every day—ideally in the time it takes to ride BART.
+
+What it is: A full-stack email hub that aggregates multiple Gmail accounts into a single, streamlined “catch-up” view with real-time, two-way sync.
+
+Why it matters: Inspired by Slack’s Catch Up pattern, it reduces context switching, surfaces what matters, and turns hours of weekly email triage into a quick daily ritual.
+
+My role: Principal PM + hands-on builder — product strategy, UX flows, system design, and implementation (Django, React, Gmail API, Celery, Redis).
+
+Status: Live personal tool with a roadmap toward an AI-aware productivity hub (task extraction, summaries, calendar intelligence).
+
+Project Detail Page
+Overview
+
+Empty my Inbox is a unified email productivity tool that consolidates multiple Gmail accounts into a single, streamlined interface. It’s built to make “Inbox Zero” realistic: instead of spending hours each week bouncing between accounts, I can now clear everything in one focused session—often during a single BART commute.
+
+Type: Personal product / full-stack build
+
+Role: Principal Product Manager, full-stack maker (product, UX, architecture, implementation)
+
+Stack: Django, Django REST Framework, React, Tailwind, PostgreSQL, Celery, Redis, Gmail API, OAuth2, JWT
+
+Status: In active use, with an evolving roadmap toward an AI-powered personal productivity hub
+
+The Problem & Spark
+
+I love Slack’s Catch up feature. It gives me a single, focused lane to process messages and consistently reach “Slack Zero.”
+
+Email was the opposite experience:
+
+I had multiple Gmail accounts (personal, work, side projects).
+
+I was constantly context switching between inboxes.
+
+Important messages got buried under newsletters, promos, and noise.
+
+“Email time” ballooned into hours per week and a dreaded weekend chore.
+
+I wanted that same “one lane, clean sweep” feeling for email:
+
+“What if I could process all my email from all accounts in one place, fast enough to do it on a train ride—and end every day at Inbox Zero?”
+
+Empty my Inbox is my answer to that question.
+
+Solution at a Glance
+
+Empty my Inbox treats email like a processing queue, not a static inbox.
+
+Unify: Pull all Gmail accounts into one view.
+
+Simplify: Strip away UI clutter; optimize for fast, repeatable actions.
+
+Sync: Keep everything in lockstep with Gmail in real time.
+
+Scale: Design the system so it can later power tasks, notes, and calendar intelligence on top of email.
+
+What It Does Today
+1. Multi-Account Aggregation
+
+Connect multiple Gmail accounts via secure OAuth2.
+
+Aggregate emails from all accounts into a single unified queue.
+
+Maintain account identity (so you still know where each email lives) while benefiting from one processing surface.
+
+2. Real-time, Two-Way Synchronization
+
+Every action in Empty my Inbox reflects back to Gmail:
+
+Mark as read/unread
+
+Star / unstar
+
+Respect and preserve Gmail labels
+
+All updates propagate in near real time through background workers and the Gmail API.
+
+3. Fast Email Processing UI
+
+The UI is designed like a “catch-up lane”:
+
+Clean, minimal layout focusing on one primary action bar.
+
+Bulk operations to process multiple emails at once.
+
+Filters by account, read status, and other parameters to narrow the queue.
+
+Quick view of email content without jumping away from the main processing flow.
+
+4. Newsletter & Promo Management
+
+Visually separate newsletters and promotional content from high-value mail.
+
+Support for quick-clear patterns to batch through low-priority emails.
+
+Ability to bookmark/save interesting newsletters for later reading without cluttering the main inbox.
+
+Where It’s Going: The Future Vision
+
+The longer-term vision is for Empty my Inbox to become a productivity layer on top of email—using intelligence (including GenAI) to turn unstructured noise into structured, actionable data.
+
+Planned and explorative directions:
+
+1. Intelligent Task Management
+
+Automatically extract action items from email bodies (e.g., “follow up,” “review,” “approve”).
+
+One-click conversion from an email to a to-do with context preserved.
+
+Smart prioritization and grouping based on sender, content, and due dates.
+
+2. Integrated Note-Taking
+
+Create notes directly from emails, pre-filled with relevant context.
+
+Link notes back to specific emails or threads.
+
+Over time, use email + notes to form a lightweight knowledge base (e.g., decisions, agreements, key docs).
+
+3. Calendar Intelligence
+
+Deeper integration with Google Calendar.
+
+Automatically detect dates, times, and commitments in emails and offer “add to calendar” suggestions.
+
+Use scheduling context (working hours, existing events) to propose smart meeting slots.
+
+4. Advanced Email Intelligence (AI & GenAI)
+
+Go beyond Gmail’s default categories to build richer semantic buckets (e.g., “billing,” “travel,” “approvals,” “intros”).
+
+Summarize long threads using LLMs so you can understand a 30-message chain in a few sentences.
+
+A smarter priority inbox informed by sender history, response patterns, and content.
+
+5. Productivity Analytics
+
+Track email processing patterns (when you clear fastest, what slows you down).
+
+Highlight time sinks (e.g., recurring threads that never resolve, low-value senders).
+
+Generate lightweight weekly / monthly digests: how much you processed, how quickly, and how it’s trending.
+
+How I Built It
+
+I approached this as both a product and systems problem.
+
+Product Approach
+
+API-first: From day one, I treated the backend as a standalone API that could serve multiple UIs (web, mobile, browser extension).
+
+Single-flow UX: Everything centers around one primary processing lane; navigation is intentionally limited to keep attention in the queue.
+
+Experiment-friendly: The architecture supports adding new “actions” or “views” (tasks, notes, analytics) without rewriting the core email sync logic.
+
+Technical Architecture
+
+Backend – Django + DRF
+
+Django 4.2 for core web framework & ORM.
+
+Django REST Framework for a clean, versionable API layer.
+
+PostgreSQL for persistent storage of email metadata, user accounts, and sync state.
+
+Celery + Redis for background jobs (sync, batch operations, token refresh).
+
+Google APIs Client (Python) for Gmail integration.
+
+Frontend – React
+
+React SPA for a responsive, snappy inbox-processing experience.
+
+JWT-based auth with automatic refresh; minimal round-trips and predictable auth flows.
+
+Tailwind CSS for rapid iteration on layout and interaction patterns.
+
+Infrastructure & System Design
+
+Key system pieces:
+
+EmailAccount model – tracks each connected Gmail account, OAuth tokens, and sync metadata.
+
+Email model – stores email metadata (sender, subject, labels, timestamps, read/star state) with indexed fields for fast querying and filtering.
+
+User model – standard Django user, extended for mapping multiple EmailAccounts per user.
+
+Core API endpoints:
+
+/api/auth/ – authentication and user management (JWT issuing and refresh).
+
+/api/accounts/ – list, connect, and manage Gmail accounts; trigger manual sync.
+
+/api/emails/ – retrieve, filter, and act on emails (read/unread, star, bulk actions).
+
+/api/auth/gmail/ – OAuth2 flow endpoints for Google sign-in and token exchange.
+
+Background tasks (Celery workers):
+
+Periodic sync for each active Gmail account, respecting API quotas.
+
+Bulk operations (marking large batches as read, archive, etc.) without blocking the UI.
+
+Token lifecycle: refreshing access tokens and handling expiration gracefully.
+
+Security & Performance
+
+Because this app touches personal email, security and performance weren’t optional.
+
+Security
+
+OAuth2-only: The app never stores Gmail passwords, only OAuth tokens.
+
+JWT with refresh tokens for app sessions, with token blacklisting on logout.
+
+Encrypted token storage for OAuth tokens at rest.
+
+Tight CORS configuration to lock down which origins can talk to the API.
+
+Performance & Scalability
+
+Database indexing on commonly filtered fields (account, read status, date, starred).
+
+Pagination and lazy loading for large inboxes.
+
+Batch operations to minimize API calls (e.g., bulk updates with a single Gmail API request where possible).
+
+Background sync so the UI remains snappy while Celery handles heavy lifting.
+
+Outcomes
+
+Even as a single-user tool today, the project has had real impact:
+
+I now end most days at Inbox Zero across multiple Gmail accounts.
+
+What used to be a multi-hour weekly task has become a 10–20 minute daily ritual, often squeezed into a commute.
+
+I’ve effectively given myself back several hours a month in cognitive load and admin time.
+
+From a craft perspective, this project:
+
+Let me deep-dive into email systems, OAuth2 flows, and background job design.
+
+Strengthened my ability to wear both PM and engineer hats: define the product, design the system, and ship the implementation.
+
+Created a real, extensible platform I can now layer GenAI and productivity workflows on top of.
+
+Reflection
+
+Empty my Inbox started as a personal annoyance with email overload and a positive experience with Slack’s Catch up flow. It’s now a functioning, battle-tested system that:
+
+Unifies multiple mailboxes,
+
+Streamlines the processing experience, and
+
+Sets up a clear path toward AI-powered productivity features.
+
+The thesis holds:
+
+Email doesn’t need to be overwhelming. With the right system design and a focused UI, Inbox Zero can be a daily habit—not a once-a-year fantasy.
+
+Tagline:
+
+Empty my Inbox — because your inbox should work for you, not against you.
+
+
+DemoLink - https://www.loom.com/share/57c39825aa134944a44d0f26d6826dda 
