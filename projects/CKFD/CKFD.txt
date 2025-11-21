@@ -1,0 +1,597 @@
+# Demos
+
+## What is this project?
+
+This is a **financial monitoring and education app demo** - a living prototype that showcases various features and ideas for a comprehensive personal finance platform. Built as a React application, it serves as a visual mockup and interactive demo that can be put in front of stakeholders, users, and team members to gather feedback quickly.
+
+The app simulates a complete financial wellness experience, featuring credit score tracking, cash flow analysis, educational content, gamification elements, and personalized financial insights. It's designed to demonstrate what a modern financial app could look like, with a focus on user engagement, education, and actionable insights.
+
+## What is my inspiration / Why did I build this?
+
+Sometimes building is better than talking or writing.
+
+I like to jam on lots of ideas at work - not all of them are fully fleshed out. Having a mock version of where I think different features could be going is an easy way to get feedback quickly from execs, engineers, designers, marketers, and the most important people not in the room - the user. Every month or so I'll push some changes and update a demo app I can put in front of people.
+
+This is a version from June.
+
+The core philosophy behind this project is **rapid iteration and feedback**. Instead of spending weeks writing specs or creating static mockups, I can build interactive prototypes that stakeholders can actually use and experience. This approach allows me to:
+
+- **Validate ideas quickly** - See how features feel in practice, not just on paper
+- **Get real user feedback** - People can interact with the app and provide concrete feedback
+- **Align cross-functional teams** - Engineers, designers, and product managers can all see the same vision
+- **Iterate monthly** - Regular updates keep the demo fresh and allow for continuous refinement
+
+## What does it do today?
+
+The current version (June 2025) includes a comprehensive set of features that demonstrate various aspects of a financial wellness platform:
+
+### Core Financial Tracking
+- **Cash Flow Dashboard** - Visual representation of income, expenses, and net cash flow
+- **Credit Score Monitoring** - Multi-agency credit score tracking (TransUnion, Equifax, Experian) with historical trends and factor analysis
+- **Credit Card Utilization** - Real-time tracking of credit card usage and limits
+- **Net Worth Tracking** - Overview of financial position with historical trends
+
+### Educational & Engagement Features
+- **10 Learning Modules** - Structured educational content covering various financial topics
+- **Interactive Quizzes** - Gamified learning with points and progress tracking
+- **Video Content** - Educational video carousel with curated financial content
+- **Weekly Challenges** - Spending reduction challenges with category-specific goals
+- **Streak Tracking** - Daily engagement tracking to build consistent financial habits
+
+### Personalized Insights & Recommendations
+- **Blueprint Section** - Personalized financial action plans
+- **Debt Consolidation Suggestions** - Recommendations for optimizing debt
+- **Rewards Optimization** - Credit card rewards maximization insights
+- **Credit Limit Increase Opportunities** - Proactive suggestions for credit improvements
+- **Car Value Tracking** - Asset valuation and insights
+- **Suggested Offers** - Personalized financial product recommendations
+
+### Social & Community Features
+- **Member Spotlight** - Community success stories and inspiration
+- **News Section** - Curated financial news and updates
+- **Review System** - Daily review prompts to maintain engagement
+
+### User Experience
+- **Mobile-First Design** - Optimized for mobile devices with bottom navigation
+- **Responsive Layout** - Works across different screen sizes
+- **Material Design** - Clean, modern UI using Material-UI components
+- **Interactive Bottom Sheets** - Native-feeling mobile interactions
+- **Haptic Feedback** - Enhanced mobile experience with vibration feedback
+
+## What will it do in the future?
+
+The demo is designed to evolve based on feedback and new ideas. Future iterations might include:
+
+- **Real Data Integration** - Connect to actual financial institutions via APIs (Plaid, Yodlee, etc.)
+- **Advanced Analytics** - Machine learning-powered insights and predictions
+- **Goal Setting & Tracking** - More sophisticated goal management with progress visualization
+- **Bill Reminders & Automation** - Proactive bill management and payment scheduling
+- **Investment Tracking** - Portfolio monitoring and investment recommendations
+- **Tax Optimization** - Tax planning and optimization suggestions
+- **Family Financial Planning** - Multi-user accounts and family financial management
+- **AI-Powered Chat Assistant** - Conversational interface for financial questions
+- **Social Features** - Community challenges, leaderboards, and peer learning
+- **Banking Integration** - Direct account linking and transaction categorization
+- **Subscription Management** - Track and optimize recurring subscriptions
+- **Financial Health Score** - Comprehensive scoring system beyond just credit
+
+The beauty of this approach is that new features can be prototyped quickly, tested with users, and either refined or discarded based on feedback - all without the overhead of full production development.
+
+## How did I build this?
+
+### Technology Stack
+
+**Frontend Framework:**
+- **React 19.1.0** - Modern React with latest features
+- **TypeScript 4.9.5** - Type-safe development
+- **Create React App** - Zero-configuration build tooling
+
+**UI Library & Styling:**
+- **Material-UI (MUI) v7** - Comprehensive component library
+- **Emotion** - CSS-in-JS styling solution
+- **Custom Style Guide** - Consistent theming and design tokens
+
+**Routing:**
+- **React Router DOM v7** - Client-side routing for multi-page navigation
+
+**Development Tools:**
+- **React Scripts 5.0.1** - Build and development server
+- **TypeScript** - Static type checking
+- **ESLint** - Code quality and consistency
+
+### Development Workflow
+
+1. **Built on Cursor** - Developed using Cursor IDE for efficient coding
+2. **Deployed on Vercel** - Simple deployment pipeline for quick iterations
+3. **Component-Based Architecture** - Modular, reusable components
+4. **Data-Driven Design** - JSON-based data structure for easy content updates
+
+### Architecture
+
+#### Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Homepage.tsx    # Main dashboard
+│   ├── CashFlowSection.tsx
+│   ├── CreditScoresSection.tsx
+│   ├── QuizSection.tsx
+│   ├── VideoSection.tsx
+│   └── ... (25+ components)
+├── pages/              # Route-based page components
+│   ├── Module1-10.tsx # Educational modules
+│   ├── CreditScore.tsx
+│   └── CashFlow.tsx
+├── data/               # Static data and content
+│   ├── data.json       # Main data structure
+│   ├── quizData.ts     # Quiz content
+│   ├── videoData.ts    # Video metadata
+│   └── goalsAndPreferences.ts
+├── utils/              # Utility functions
+│   └── videoUtils.ts
+├── App.tsx             # Root component with routing
+└── styleGuide.ts       # Design system tokens
+```
+
+#### Key Architectural Decisions
+
+1. **Component Modularity**
+   - Each feature is encapsulated in its own component
+   - Components are self-contained with their own state management
+   - Easy to add, remove, or modify features independently
+
+2. **Data Structure**
+   - Centralized JSON data file for easy content updates
+   - TypeScript interfaces for type safety
+   - Separation of data and presentation logic
+
+3. **Routing Strategy**
+   - Main dashboard at root (`/`)
+   - Dedicated pages for detailed views (`/credit-score`, `/cash-flow`)
+   - Module pages for educational content (`/module-1` through `/module-10`)
+
+4. **State Management**
+   - Local component state with React hooks
+   - Props drilling for parent-child communication
+   - No global state management (kept simple for demo purposes)
+
+5. **Styling Approach**
+   - Material-UI theme customization
+   - Consistent color palette and typography
+   - Mobile-first responsive design
+   - Emotion for component-level styling
+
+6. **User Experience Patterns**
+   - Bottom navigation for mobile navigation
+   - Bottom sheets for detailed views
+   - Tab-based navigation for content sections
+   - Progressive disclosure of information
+
+#### Design System
+
+The app uses a consistent design system defined in `styleGuide.ts`:
+
+- **Color Palette**: Dark forest green primary, light green for positive actions, neutral grays
+- **Typography**: Material-UI default with custom weights
+- **Spacing**: Consistent padding and margins using MateriaHome Page Summary (Project Card)
+
+Financial Wellness Demos – React prototypes for a modern money app
+
+An interactive React demo that simulates a full financial wellness experience: credit scores, cash flow, education, gamification, and personalized insights. I use it as a living prototype to explore ideas for a comprehensive personal finance platform and to align stakeholders around something they can actually click through—not just read about.
+
+What it is: A mobile-first React demo app that showcases potential features for a personal finance + education platform (credit, cash flow, learning modules, quizzes, challenges, offers, and more).
+
+Why it matters: It lets me validate concepts quickly, gather concrete feedback from execs, designers, engineers, and users, and evolve the product vision through real interactions—not static decks.
+
+My role: Principal PM + front-end builder — product vision, UX flows, feature set design, and React/TypeScript implementation.
+
+Status: Continuously updated; current snapshot is from June 2025, with new ideas and experiments layered in every few weeks.
+
+Project Detail Page
+Overview
+
+This project is a financial monitoring and education app demo—a living React prototype that shows what a modern, engaging financial wellness experience could look and feel like.
+
+It’s not a production app; it’s a high-fidelity, interactive sandbox I use to:
+
+Explore product directions across monitoring, education, and engagement
+
+Align stakeholders around a tangible experience
+
+Test content, layouts, and flows before committing real engineering resources
+
+The demo simulates a full-stack personal finance platform, including credit tracking, cash flow, education, gamification, and personalized insights, all wrapped in a mobile-first, bottom-nav experience.
+
+Type: Interactive demo / design & product exploration tool
+
+Role: Vision, feature design, UX, and implementation in React + TypeScript
+
+Tech: React, TypeScript, MUI, React Router, Vercel
+
+Status: Updated roughly monthly; current version is June 2025
+
+Inspiration & Philosophy
+
+At some point I realized:
+
+Sometimes building is better than talking or writing.
+
+I often have a lot of ideas for where financial monitoring and education could go—new modules, patterns, and interaction models. But written specs and static Figma frames only go so far:
+
+Stakeholders interpret the same spec differently
+
+It’s hard to feel pacing, overload, or delight from a static mock
+
+Users give better feedback when they can tap around something real
+
+So I created this demo app as a rapid-iteration playground:
+
+A place to visualize “what this could be” in a way that’s clickable and concrete
+
+A space to try ideas that might be too early or risky for production
+
+A shared artifact that execs, engineers, designers, marketers, and researchers can all react to
+
+Every few weeks I ship a new version and use it to:
+
+Validate ideas quickly — Does this flow feel intuitive? Overwhelming? Boring?
+
+Collect real feedback — “Show me where you’d tap next” instead of “what do you think?”
+
+Align cross-functional teams — Everyone sees the same vision, on-device
+
+Continuously refine — Features can be added, ripped out, or reshaped with minimal overhead
+
+The June 2025 version is one such snapshot of where my thinking currently is.
+
+What It Does Today
+
+The June 2025 demo includes a broad tour of what a financial wellness platform could encompass. It’s intentionally dense in features to showcase breadth, not just a single flow.
+
+Core Financial Tracking
+
+Cash Flow Dashboard
+
+Visuals for income, expenses, and net cash flow over time
+
+Emphasis on approachable, story-driven views rather than raw tables
+
+Credit Score Monitoring
+
+Multi-agency view (TransUnion, Equifax, Experian)
+
+Historical trends and factor breakdowns to explain why a score looks the way it does
+
+Credit Card Utilization
+
+Real-time style card utilization tiles and limits
+
+Designed to show “how close to the edge” a user is at a glance
+
+Net Worth Tracking
+
+Aggregated view of assets and liabilities
+
+Simple trendline to show movement over time (up, flat, or down)
+
+Education & Engagement
+
+10 Learning Modules
+
+Structured lessons on key financial topics (credit, budgeting, debt, investing basics, etc.)
+
+Each module feels like a mini-course, not just a static article
+
+Interactive Quizzes
+
+Embedded quizzes tied to modules
+
+Points/progress tracking to make learning feel like progress, not homework
+
+Video Content
+
+Video carousel for bite-sized financial education
+
+Backed by JSON-based metadata to easily swap and test different content sets
+
+Weekly Challenges
+
+Category-specific challenges (e.g., “Spend $X less on dining out this week”)
+
+Framed to encourage nudges and small wins, not guilt/shame
+
+Streak Tracking
+
+Daily engagement streaks for logins, reviews, or lesson completion
+
+Aims to make returning to the app a habit rather than a chore
+
+Personalized Insights & Recommendations
+
+Blueprint Section
+
+Conceptual area for personalized financial action plans
+
+Think: “If your financial life were a project, here’s your next sprint.”
+
+Debt Consolidation Suggestions
+
+Mocked logic for surfacing potential consolidation opportunities
+
+Demonstrates how we might explain why a recommendation makes sense
+
+Rewards Optimization
+
+“Are you leaving points/cashback on the table with your current card mix?”
+
+Illustrates how card usage can be mapped to better rewards strategies
+
+Credit Limit Opportunities
+
+Proactive prompts about where a limit increase might be available or beneficial
+
+Car Value Tracking
+
+Example of pulling in a non-bank asset (vehicle) and showing how it depreciates over time
+
+Suggested Offers
+
+Personalized, contextual financial products, surfaced in a way that feels helpful, not spammy
+
+Social & Community Layer
+
+Member Spotlight
+
+Story-driven tiles that show how others are making progress
+
+Designed to explore the motivational power of relatable examples
+
+News Section
+
+Curated financial news feed
+
+A place to experiment with how much “news” vs “evergreen content” is useful
+
+Review System
+
+Daily or weekly review prompts (e.g., “Take 2 minutes to review your week”)
+
+Prototype for recurring reflection patterns, not just passive dashboards
+
+UX & Interaction Patterns
+
+Mobile-First Design
+
+Bottom navigation, touch-friendly components, and progressive disclosure
+
+Feels like a real mobile app, even when run in a browser
+
+Responsive Layout
+
+Adapts to various screen sizes cleanly
+
+Material-UI Foundation
+
+Leveraging MUI for consistent, modern components and accessible defaults
+
+Interactive Bottom Sheets & Haptics (conceptually)
+
+Native-feeling interaction patterns for drilling into details
+
+Designed with an eye toward real mobile clients where haptics are supported
+
+Where It’s Going
+
+Because this is a demo first, the roadmap is intentionally flexible and exploratory.
+
+Potential future directions:
+
+Real Data Integration
+
+Pull actual financial data via APIs (Plaid, Yodlee, etc.).
+
+Evolve from static sample data to live-like experiences.
+
+Advanced Analytics & ML
+
+Predictive cash flow and risk alerts
+
+Smart categorizations and anomaly detection (“this month doesn’t look like your usual pattern”)
+
+Richer Goal Setting
+
+Multi-goal systems (debt, savings, investing) with clear trade-offs
+
+Progress timelines that feel encouraging, not discouraging
+
+Bill Reminders & Automations
+
+Bill calendar, notifications, and suggestions for autopay or consolidation
+
+Investment & Tax Layers
+
+Basic portfolio tracking
+
+Tax-relevant insights (e.g., contribution gaps, tax-loss harvesting ideas)
+
+Family & Shared Finances
+
+Multi-user or “household view” support
+
+Goals and dashboards that reflect shared realities, not just individual ones
+
+AI-Powered Assistant
+
+In-app conversational assistant to:
+
+Explain trends
+
+Answer “what if?” questions
+
+Walk users through trade-offs
+
+Expanded Engagement Features
+
+Community challenges, light leaderboards
+
+Peer learning loops without exposing sensitive data
+
+The common theme: keep demo velocity high, keep risk low, and use this space to test big ideas before asking engineering to harden them.
+
+How I Built It
+Tech Stack
+
+Frontend Framework
+
+React + TypeScript – Core front-end stack
+
+Create React App – Simple build setup for fast iteration
+
+UI & Styling
+
+Material-UI (MUI) – Component library for consistent, accessible UI
+
+Emotion – CSS-in-JS for scoped, component-level styling
+
+Custom style guide – Centralized design tokens (colors, typography, spacing)
+
+Routing
+
+React Router DOM – Client-side routing for multi-page flows (dashboard, modules, details)
+
+Tooling & Deployment
+
+Developed using Cursor, optimized for fast refactors and code assist
+
+Deployed on Vercel for quick previews and stakeholder links
+
+Standard CRA build pipeline (npm run build → deploy)
+
+Architecture
+High-Level Structure
+src/
+├── components/          # Reusable UI pieces
+│   ├── Homepage.tsx
+│   ├── CashFlowSection.tsx
+│   ├── CreditScoresSection.tsx
+│   ├── QuizSection.tsx
+│   ├── VideoSection.tsx
+│   └── ... (25+ feature components)
+├── pages/               # Route-level screens
+│   ├── Module1–10.tsx   # Educational modules
+│   ├── CreditScore.tsx
+│   └── CashFlow.tsx
+├── data/                # Structured mock data
+│   ├── data.json
+│   ├── quizData.ts
+│   ├── videoData.ts
+│   └── goalsAndPreferences.ts
+├── utils/
+│   └── videoUtils.ts
+├── App.tsx              # Root + routing
+└── styleGuide.ts        # Design tokens & theming
+
+Key Architectural Decisions
+
+Component Modularity
+
+Each conceptual feature (cash flow, quizzes, video rail, etc.) is its own component.
+
+Self-contained logic per component makes it easy to experiment or remove a feature without breaking others.
+
+Data-Driven Design
+
+Central JSON/TS data files back most of the UI.
+
+Makes it trivial to:
+
+Swap in new quiz sets
+
+Change copy and content
+
+Explore different configurations without touching core UI logic
+
+Simple Routing
+
+Main dashboard at / for the big picture.
+
+Detail pages for deeper dives (/credit-score, /cash-flow, /module-x, etc.).
+
+Keeps navigation structured and easy to talk through in demos.
+
+Local State Only (for now)
+
+React hooks + props for state and communication.
+
+No global state manager intentionally, to keep the demo lightweight and easy to refactor.
+
+Styling & Design System
+
+MUI theme customization + styleGuide.ts for:
+
+Color palette (dark forest green primary, light greens, neutrals)
+
+Typography rules
+
+Spacing conventions
+
+Ensures that as new components appear, they still feel cohesive.
+
+Mobile-First UX Patterns
+
+Bottom nav, bottom sheets, tabbed sections, progressive disclosure.
+
+All oriented toward how an actual native app would feel.
+
+Development Philosophy
+
+This whole project is anchored on rapid prototyping and showing, not telling:
+
+Speed over polish (early on)
+Get the idea on-screen quickly, then refine based on how it actually feels.
+
+Visual feedback
+It’s easier to debate a feature once you can tap through it.
+
+Iterate monthly
+Treat the demo like a living product: each new version captures the next slice of vision.
+
+Low operational overhead
+Simple stack, simple deployment, so experimentation is cheap—in time and energy.
+
+Reflection
+
+These demos are where my product thinking, system design, and builder instincts meet:
+
+They let me prototype the future of financial wellness in a safe space.
+
+They give stakeholders something concrete to react to, which surfaces better questions.
+
+They keep me honest: if an idea looks good in a doc but feels off in the demo, it probably needs rethinking.
+
+In short:
+
+This project is my “show, don’t tell” engine for financial UX and system ideas.l-UI's spacing system
+- **Components**: Reusable Material-UI components with custom styling
+
+#### Deployment
+
+- **Platform**: Vercel
+- **Build Process**: Standard Create React App build (`npm run build`)
+- **Deployment**: Automatic on git push (if configured) or manual deployment
+- **Hosting**: Static site hosting with client-side routing
+
+### Development Philosophy
+
+This project follows a **rapid prototyping** philosophy:
+
+1. **Speed over perfection** - Get features working quickly, refine later
+2. **Visual feedback** - Show, don't just tell
+3. **Iterative improvement** - Monthly updates based on feedback
+4. **Low overhead** - Simple tech stack, no complex infrastructure
+5. **Easy updates** - Component-based architecture makes changes simple
+
+The goal is to have a working demo that can be shared and iterated on quickly, without the complexity of a full production application. This allows for experimentation and learning without the constraints of production systems.
+
+InteractiveDemo: https://ckfdjune25.vercel.app/ 

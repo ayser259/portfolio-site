@@ -1,0 +1,288 @@
+Home Page Summary (Project Card)
+
+ByteMe – Applying fintech thinking to nutrition
+
+ByteMe is a native iOS nutrition tracker that borrows patterns from financial monitoring—turning daily food logging into a clean, insight-driven experience. I built it both as a real health tool I use every day and as a sandbox to prototype ideas for personal finance monitoring: frictionless entry, trend visualization, and habit-forming feedback loops.
+
+What it is: A Swift/SwiftUI iOS app for logging meals, tracking macros/micros, and visualizing nutrition trends over time.
+
+Why it matters: It lets me test and refine monitoring patterns (data entry, dashboards, goals) in a health context, then port the best ideas back into my work on financial monitoring.
+
+My role: Principal PM + iOS dev — product strategy, UX flows, system architecture, and implementation.
+
+Status: Live personal app, evolving toward deeper integrations with Apple Health, Apple Watch, and Whoop.
+
+Project Detail Page
+Overview
+
+ByteMe is a personal nutrition monitoring app that brings financial monitoring patterns into the health space.
+
+On the surface, it’s a clean, simple iOS app for logging meals and tracking nutrition. Under the hood, it’s a deliberate experiment in:
+
+How to make complex data feel approachable
+
+How to design monitoring workflows that people actually stick with
+
+How to build an app that can later plug into richer health ecosystems (Apple Health, Apple Watch, Whoop)
+
+I use ByteMe daily both to manage my own nutrition and as a sandbox for ideas that I can transfer back into my work on personal finance monitoring.
+
+Type: Native iOS app (nutrition monitoring)
+
+Role: Product, design, and implementation
+
+Stack: Swift, SwiftUI, local persistence + cloud sync; designed for HealthKit / Watch / Whoop integrations
+
+Status: Actively used; integration roadmap in progress
+
+Problem & Inspiration
+
+Working on a personal finance monitoring product, I spend a lot of time thinking about:
+
+How people enter data (or avoid it)
+
+How they scan dashboards
+
+How they interpret trends and set goals
+
+What actually drives behavior change
+
+While evaluating other tools across domains, I noticed something:
+
+Health tracking apps often feel more intuitive and human-friendly than their financial counterparts—even though both deal with time-series data, goals, and personal outcomes.
+
+The parallels between money and nutrition are obvious:
+
+Regular data entry → logs, transactions, meals
+
+Ongoing monitoring → balances, budgets, calorie/macro counts
+
+Trend analysis → spending patterns vs eating patterns
+
+Goals & progress → savings targets vs weight / performance / health goals
+
+So I asked:
+
+“What if I built a health app that lets me test monitoring patterns for finance—while also giving me something genuinely useful in my day-to-day life?”
+
+ByteMe is that app:
+
+A testing ground for UX and systems ideas I care about professionally
+
+A real tool I use to manage what I eat and how it impacts how I feel
+
+What ByteMe Does Today
+
+ByteMe focuses on being frictionless to log and easy to understand. It avoids trying to be “everything health” and instead goes deep on nutrition.
+
+Core Capabilities
+
+Meal Logging
+
+Quickly log meals and snacks throughout the day.
+
+Capture essential data like foods, quantities, and meal times.
+
+Designed to be fast enough that logging doesn’t feel like a separate task.
+
+Nutrition Tracking
+
+Track macronutrients (protein, carbs, fats) and key micronutrients, depending on available data.
+
+Aggregate intake by meal, day, and longer time periods.
+
+Patterns & Trends
+
+Simple visualizations that highlight:
+
+Daily intake vs goals
+
+Consistency over time
+
+Emerging patterns (e.g., under-eating protein, late-night calorie spikes)
+
+Emphasis on clarity over complexity—enough data to be useful, not enough to overwhelm.
+
+Goals & Progress
+
+Set nutrition-related targets (e.g., daily protein, calories, macros balance).
+
+Track how often and how well you’re hitting those goals.
+
+Reinforce habit formation by making progress feel visible and attainable.
+
+The result is an app that’s lean but effective: quick to use, informative enough to change behavior, and structured around daily use instead of one-off experiments.
+
+Future Roadmap
+
+The next phase for ByteMe is deeper integration into the broader health ecosystem, so nutrition isn’t viewed in isolation.
+
+1. Apple Health Integration
+
+Sync nutrition data into Apple Health for a holistic health record.
+
+Pull activity data (steps, exercise, energy expenditure) to connect what you eat to how you move.
+
+Enable cross-app data sharing, so ByteMe doesn’t have to do everything itself; it can coexist with other health and fitness apps.
+
+2. Apple Watch Companion App
+
+Quick logging from the wrist for snacks and simple meals.
+
+Glanceable insights (e.g., today’s macro breakdown, remaining goals).
+
+Real-time nudges like “you’re trending low on protein today” or “you’re close to your calorie target.”
+
+3. Whoop & Recovery Context
+
+Pull recovery and strain data from Whoop.
+
+Start to answer questions like:
+
+“What does my best recovery days actually look like nutritionally?”
+
+“What eating patterns correlate with poor sleep or low recovery scores?”
+
+Move toward a performance + recovery view of nutrition, not just calorie counting.
+
+Together, these integrations push ByteMe from “nutrition tracker” toward a personal health performance dashboard, with food as a core input.
+
+How I Built It
+Development Philosophy
+
+I took an iterative, dogfood-heavy approach:
+
+I am both product manager and primary user.
+
+Features get shipped small, then adjusted based on real daily use.
+
+If something feels annoying or slow in my real life, it gets redesigned.
+
+This creates a tight build → use → refine loop that keeps the app grounded in real behavior instead of hypothetical personas.
+
+Technology Stack
+
+Mobile Application
+
+Native iOS for tight integration and performance.
+
+Swift for a modern, type-safe foundation.
+
+SwiftUI for declarative UI, making it easy to evolve layouts and components as the product changes.
+
+Data Layer
+
+Local persistence so the app works even without a network connection (offline-first by design).
+
+Cloud sync to back up data and support multi-device use.
+
+Structured data models for:
+
+Meals and food items
+
+Macro/micro breakdowns
+
+Goals and historical summaries
+
+Integration Layer
+
+Designed with HealthKit integration in mind from the start.
+
+API abstractions in place for:
+
+Future Whoop integrations
+
+Potential other fitness or health services
+
+Extensible architecture so new data sources can be added without rewriting the core app.
+
+System Design
+
+At a high level, the app is organized into clear layers:
+
+┌─────────────────────────────────────────┐
+│           User Interface Layer          │
+│    (SwiftUI – Meal Logging, Insights)   │
+└──────────────────┬──────────────────────┘
+                   │
+┌──────────────────▼──────────────────────┐
+│         Application Logic Layer         │
+│ (Nutrition Calculation, Goal Tracking)  │
+└──────────────────┬──────────────────────┘
+                   │
+┌──────────────────▼──────────────────────┐
+│               Data Layer                │
+│     (Local Storage + Cloud Sync)        │
+└──────────────────┬──────────────────────┘
+                   │
+┌──────────────────▼──────────────────────┐
+│            Integration Layer            │
+│   (Future: HealthKit, Watch, Whoop)     │
+└─────────────────────────────────────────┘
+
+Key Architectural Decisions
+
+Offline-First
+
+Logging meals should never depend on connectivity.
+
+All core actions work locally and sync when a connection is available.
+
+Modular Architecture
+
+UI, business logic, data access, and integrations are cleanly separated.
+
+New integrations (HealthKit, Whoop, Watch app) plug into the integration layer without forcing changes in UI or logic layers.
+
+Native iOS Focus
+
+I chose native rather than cross-platform to:
+
+Get the best UX on iOS
+
+Integrate deeply with Apple’s health and watch ecosystems
+
+Avoid fighting framework limitations when doing HealthKit and WatchOS work.
+
+Data-Driven From Day One
+
+The data models and storage are designed with analytics and visualization in mind.
+
+This makes it straightforward to build dashboards and trend views that actually matter to users.
+
+What I Learned (and Brought Back to Finance)
+
+Building and using ByteMe has directly sharpened my thinking on monitoring products in general—especially in the financial space.
+
+A few key takeaways:
+
+Frictionless entry is everything.
+If logging a meal (or a transaction) is painful, users stop. Every second you shave off the flow matters.
+
+Show just enough data.
+Overly dense dashboards create anxiety. The right abstractions (e.g., “are you on track today?”) beat walls of charts.
+
+Habits > features.
+The job is not to expose all the data; it’s to build a loop that users will come back to daily or weekly.
+
+Personal iteration beats hypothetical design.
+Dogfooding ByteMe forced me to confront the gap between “clever” and “actually usable.”
+
+These lessons flow straight back into my work on financial monitoring: how we present balances, how we treat trends, how we nudge people toward better behaviors without overwhelming them.
+
+Reflection
+
+ByteMe started as a learning experiment—a way to play with health data while thinking about finance. It’s grown into:
+
+A real health app I rely on every day
+
+A sandbox for monitoring UX and system ideas
+
+A concrete example of how I blend product thinking, systems design, and hands-on building
+
+It sits nicely alongside your other projects as:
+
+ByteMe — where I test how to make data-driven products feel human, one meal at a time.
+
+
+DemoLink:https://www.loom.com/share/9f5c16bc44a84eb9bb24c8d31f9f5f84 
