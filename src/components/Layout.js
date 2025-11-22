@@ -55,8 +55,8 @@ const Layout = ({ children }) => {
 
   return (
     <div className="layout">
-      {/* Navigation */}
-      <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+      {/* Navigation - Hidden */}
+      <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`} style={{ display: 'none' }}>
         <div className="container">
           <div className="navbar-content">
             <Link to="/" className="navbar-brand">

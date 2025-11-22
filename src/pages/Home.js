@@ -1,9 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [videoState, setVideoState] = useState('initial'); // 'initial', 'sliding', 'ready', 'fading-out'
+  const [hasSlidIn, setHasSlidIn] = useState(false); // Track if first video has completed slide-in
+  const [showText, setShowText] = useState(false); // Control text visibility
+  const videoRef = useRef(null);
+  const nextVideoRef = useRef(null);
+
+  const backgroundVideos = [
+    '/background/coffee.mp4',
+    '/background/writing.mp4',
+    '/background/type.mp4',
+    '/background/pause.mp4',
+    '/background/wave.mp4'
+  ];
 
   const projects = [
     {
@@ -150,6 +165,100 @@ const Home = () => {
     ? projects 
     : projects.filter(p => p.category === selectedFilter);
 
+  // Preload next video
+  useEffect(() => {
+    const nextIndex = (currentVideoIndex + 1) % backgroundVideos.length;
+    const nextVideo = nextVideoRef.current;
+    if (nextVideo) {
+      nextVideo.src = backgroundVideos[nextIndex];
+      nextVideo.load();
+    }
+  }, [currentVideoIndex, backgroundVideos]);
+
+  // Video rotation logic with smooth transitions
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    setIsVideoLoading(true);
+    setVideoState('initial'); // Reset state for new video
+    
+    // Determine if this is the first video on initial load (hasn't slid in yet)
+    const isFirstVideo = currentVideoIndex === 0 && !hasSlidIn;
+
+    const handleVideoEnd = () => {
+      setVideoState('fading-out');
+      setTimeout(() => {
+        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % backgroundVideos.length);
+      }, 600);
+    };
+
+    const handleVideoLoadedData = () => {
+      // Video data is loaded, prepare for animation
+      if (isFirstVideo) {
+        // First video slides in
+        setVideoState('sliding');
+      } else {
+        // Subsequent videos fade in
+        setVideoState('ready');
+      }
+    };
+
+    const handleVideoCanPlay = () => {
+      setIsVideoLoading(false);
+      // Start playing the video
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log('Video autoplay prevented:', error);
+          setIsVideoLoading(false);
+        });
+      }
+    };
+
+    const handleVideoWaiting = () => {
+      setIsVideoLoading(true);
+    };
+
+    const handleVideoPlaying = () => {
+      setIsVideoLoading(false);
+      // After first video starts playing, mark slide-in as complete after animation
+      if (isFirstVideo) {
+        setTimeout(() => {
+          setVideoState('ready');
+          setHasSlidIn(true);
+        }, 1500); // Match animation duration
+      }
+    };
+
+    video.addEventListener('ended', handleVideoEnd);
+    video.addEventListener('loadeddata', handleVideoLoadedData);
+    video.addEventListener('canplay', handleVideoCanPlay);
+    video.addEventListener('waiting', handleVideoWaiting);
+    video.addEventListener('playing', handleVideoPlaying);
+
+    // Load the video
+    video.load();
+
+    return () => {
+      video.removeEventListener('ended', handleVideoEnd);
+      video.removeEventListener('loadeddata', handleVideoLoadedData);
+      video.removeEventListener('canplay', handleVideoCanPlay);
+      video.removeEventListener('waiting', handleVideoWaiting);
+      video.removeEventListener('playing', handleVideoPlaying);
+    };
+  }, [currentVideoIndex, backgroundVideos.length, hasSlidIn]);
+
+
+  // Show text after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowText(true);
+    }, 5000); // 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // Smooth scroll for anchor links
   useEffect(() => {
     const handleAnchorClick = (e) => {
@@ -171,8 +280,38 @@ const Home = () => {
     <div className="home">
       {/* Hero Section */}
       <section id="hero" className="hero">
+        {/* Background Video */}
+        <div className="hero-background">
+          {/* Main video */}
+          <video
+            ref={videoRef}
+            className={`hero-video hero-video-${videoState}`}
+            src={backgroundVideos[currentVideoIndex]}
+            autoPlay
+            muted
+            loop={false}
+            playsInline
+            preload="auto"
+          />
+          {/* Preload next video (hidden) */}
+          <video
+            ref={nextVideoRef}
+            className="hero-video-next"
+            muted
+            loop={false}
+            playsInline
+            preload="auto"
+          />
+          {/* Loading indicator */}
+          {isVideoLoading && (
+            <div className="hero-video-loading">
+              <div className="loading-spinner"></div>
+            </div>
+          )}
+          <div className="hero-background-overlay" />
+        </div>
         <div className="container">
-          <div className="hero-content">
+          <div className={`hero-content ${showText ? 'slide-in-text' : 'text-hidden'}`}>
             <div className="hero-badge">Product Manager</div>
             <h1 className="hero-title">
               Hi, I'm <span className="text-primary">Ayser Choudhury</span>
@@ -191,6 +330,9 @@ const Home = () => {
               </a>
             </div>
           </div>
+        </div>
+        <div className="hero-scroll-indicator">
+          <span>Scroll</span>
         </div>
       </section>
 
