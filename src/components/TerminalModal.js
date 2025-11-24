@@ -125,11 +125,23 @@ function TerminalModal({ isOpen, onOpen }) {
   };
 
   const returnToChoiceChips = () => {
-    resetTyping();
+    // Don't reset the displayed text - keep all conversations visible
+    // Just reset typing state and show chips again
+    messageIndexRef.current = 0;
+    charIndexRef.current = 0;
+    setIsTypingComplete(true); // Mark as complete so skip button doesn't show
+    setShowCursor(false);
+    isTypingCompleteRef.current = true;
+    setFastForwardMode(false);
+    setSelectedChip(null);
     setCurrentMode('initial');
     setShowChoiceChips(true);
-    // Clear the displayed text so chips show below the initial content
-    // Or we could keep it and show chips below
+    
+    // Clear any pending timeouts
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+      typingTimeoutRef.current = null;
+    }
   };
 
   const typeMessage = (messages) => {
@@ -144,6 +156,7 @@ function TerminalModal({ isOpen, onOpen }) {
       const currentMessage = messagesToType[messageIndexRef.current];
       
       if (charIndexRef.current < currentMessage.length) {
+        // Append character to existing text
         typedTextRef.current += currentMessage[charIndexRef.current];
         setDisplayedText(typedTextRef.current);
         charIndexRef.current++;
@@ -191,6 +204,29 @@ function TerminalModal({ isOpen, onOpen }) {
   };
 
   const handleChipClick = (chipId) => {
+    // Special case: "projects" chip scrolls to projects showcase section
+    if (chipId === 'projects') {
+      setSelectedChip(chipId);
+      // Mark as completed so it doesn't show again
+      if (!completedConversations.includes(chipId)) {
+        setCompletedConversations([...completedConversations, chipId]);
+      }
+      setShowChoiceChips(false);
+      
+      // Scroll to projects showcase section
+      setTimeout(() => {
+        const projectsSection = document.getElementById('projects-showcase');
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 300);
+      return;
+    }
+
+    // For other chips, load conversation
     if (!conversations[chipId]) {
       console.error(`Conversation not found for chip: ${chipId}`);
       return;
@@ -205,24 +241,35 @@ function TerminalModal({ isOpen, onOpen }) {
     const conversation = conversations[chipId];
     const conversationMessages = conversation.messages;
     
-    // Add a separator before conversation
+    // Save current displayed text
+    const currentDisplayedText = typedTextRef.current;
+    
+    // Add a separator before conversation starts
     const separator = '\n\n';
-    typedTextRef.current += separator;
+    typedTextRef.current = currentDisplayedText + separator;
     setDisplayedText(typedTextRef.current);
+    
+    // Reset typing state but keep the text we've added so far
+    messageIndexRef.current = 0;
+    charIndexRef.current = 0;
+    setShowCursor(true);
+    setIsTypingComplete(false);
+    isTypingCompleteRef.current = false;
+    setFastForwardMode(false);
+    
+    // Clear any pending timeouts
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+      typingTimeoutRef.current = null;
+    }
+    
+    // Set conversation messages
+    setCurrentMessages(conversationMessages);
     
     // Start typing the conversation after a brief delay
     setTimeout(() => {
-      resetTyping();
-      // Keep the previous text and add conversation
-      const previousText = typedTextRef.current;
-      typedTextRef.current = previousText;
-      setCurrentMessages(conversationMessages);
-      // Start typing conversation messages
       typeMessage(conversationMessages);
     }, 300);
-    
-    // Mark conversation as completed after it finishes (will be set after typing completes)
-    // We'll track this after the conversation completes
   };
 
   const allChoiceChips = [
@@ -261,13 +308,16 @@ function TerminalModal({ isOpen, onOpen }) {
           )}
           
           {/* Choice chips - shown after typing completes */}
-          {showChoiceChips && (
+          {showChoiceChips && availableChoiceChips.length > 0 && (
             <div className="choice-chips-container">
               <div className="choice-chips-label">
-                Tell me more about:
+                {completedConversations.length > 0 
+                  ? "What would you like to explore next?"
+                  : "Tell me more about:"
+                }
               </div>
               <div className="choice-chips">
-                {choiceChips.map((chip) => (
+                {availableChoiceChips.map((chip) => (
                   <button
                     key={chip.id}
                     className={`choice-chip ${selectedChip === chip.id ? 'selected' : ''}`}
@@ -276,6 +326,15 @@ function TerminalModal({ isOpen, onOpen }) {
                     {chip.label}
                   </button>
                 ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Show message when all conversations are completed */}
+          {showChoiceChips && availableChoiceChips.length === 0 && (
+            <div className="choice-chips-container">
+              <div className="choice-chips-label">
+                Thanks for exploring! Feel free to reach out if you'd like to chat more.
               </div>
             </div>
           )}

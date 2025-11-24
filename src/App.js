@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
+import ProjectsShowcase from './components/ProjectsShowcase';
 
 function App() {
   const videoRef = useRef(null);
@@ -16,11 +17,9 @@ function App() {
       const isMobile = window.innerWidth <= 768;
       
       if (isMobile) {
-        // Mobile: video stays full screen as background behind the modal
-        video.style.width = `${viewportWidth}px`;
-        video.style.height = `${viewportHeight}px`;
-        video.style.left = '0';
-        video.style.top = '0';
+        // Mobile: video stays full width/height
+        video.style.width = '100%';
+        video.style.height = '100%';
         video.style.objectFit = 'cover';
         video.style.objectPosition = 'center center';
       } else {
@@ -29,16 +28,10 @@ function App() {
         const videoWidth = isModalOpen ? viewportWidth - modalWidth : viewportWidth;
         
         video.style.width = `${videoWidth}px`;
-        video.style.height = `${viewportHeight}px`;
-        video.style.left = '0';
-        video.style.top = '0';
+        video.style.height = '100%';
         video.style.objectFit = 'cover';
         video.style.objectPosition = 'left center';
       }
-      
-      // No transform needed - object-fit: cover handles the scaling and cropping
-      video.style.transform = 'none';
-      video.style.transformOrigin = 'left top';
     }
     
     // Update size when video metadata loads
@@ -88,20 +81,26 @@ function App() {
 
   return (
     <div className="App">
-      <video 
-        id="bgVideo"
-        ref={videoRef}
-        className={isModalOpen ? 'modal-open' : ''}
-        autoPlay 
-        muted 
-        loop 
-        playsInline
-      >
-        <source src="/assets/images/background/full_background_video.mov" type="video/mp4" />
-        <source src="/assets/images/background/full_background_video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <TerminalModal isOpen={isModalOpen} onOpen={() => setIsModalOpen(true)} />
+      {/* Hero Section with Video Background */}
+      <section className="hero-section">
+        <video 
+          id="bgVideo"
+          ref={videoRef}
+          className={isModalOpen ? 'modal-open' : ''}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src="/assets/images/background/full_background_video.mov" type="video/mp4" />
+          <source src="/assets/images/background/full_background_video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <TerminalModal isOpen={isModalOpen} onOpen={() => setIsModalOpen(true)} />
+      </section>
+      
+      {/* Projects Showcase Section */}
+      <ProjectsShowcase />
     </div>
   );
 }
