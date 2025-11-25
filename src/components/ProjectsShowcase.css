@@ -5,6 +5,8 @@
   padding: 0;
   position: relative;
   z-index: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .projects-container {
@@ -40,6 +42,8 @@
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  color: inherit;
 }
 
 .project-card::before {

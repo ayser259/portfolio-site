@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 
-function App() {
+function HomePage() {
   const videoRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -102,6 +104,17 @@ function App() {
       {/* Projects Showcase Section */}
       <ProjectsShowcase />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:projectName" element={<ProjectDetailPage />} />
+      </Routes>
+    </Router>
   );
 }
 

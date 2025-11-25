@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProjectsShowcase.css';
 import siteContent from '../content';
 import projectHomeSummaries from '../data/projectHomeSummaries';
 import projectDetails from '../data/projectDetails';
-import ProjectDetailModal from './ProjectDetailModal';
 
 function ProjectsShowcase() {
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   // Map project titles from content.js to keys in projectHomeSummaries
   const projectKeyMap = {
     'Sighed Kick (Gen AI Writing Partner)': 'SighedKick',
@@ -16,6 +13,11 @@ function ProjectsShowcase() {
     'ByteMe': 'ByteMe',
     'Financial Wellness Demos': 'CKFD',
     'AI-Assisted PRD Workflow': 'PRDSystem'
+  };
+
+  // Helper function to convert project key to URL slug
+  const getProjectSlug = (projectKey) => {
+    return projectKey.toLowerCase();
   };
 
   // Filter and map projects to only include those with summaries in projectHomeSummaries
@@ -37,34 +39,9 @@ function ProjectsShowcase() {
         iconColor: summary.iconColor || project.iconColor,
         technologies: summary.technologies || project.technologies,
         projectKey: projectKey, // Store the key for modal lookup
-        externalUrl: summary.externalUrl // Include external URL if available
+        projectSlug: getProjectSlug(projectKey) // URL slug for routing
       };
     });
-
-  const handleProjectClick = (project) => {
-    // If project has external URL, open it
-    if (project.externalUrl) {
-      window.open(project.externalUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    // For other projects, open modal if details exist
-    if (project.projectKey && projectDetails[project.projectKey]) {
-      setSelectedProject(projectDetails[project.projectKey]);
-      setIsModalOpen(true);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-    // Force scroll restoration after modal closes
-    setTimeout(() => {
-      document.body.style.removeProperty('overflow');
-      document.body.style.removeProperty('padding-right');
-      document.documentElement.style.removeProperty('overflow');
-    }, 100);
-  };
 
   return (
     <section id="projects-showcase" className="projects-showcase">
@@ -73,11 +50,11 @@ function ProjectsShowcase() {
         
         <div className="projects-grid">
           {allProjects.map((project, index) => (
-            <div 
-              key={index} 
+            <Link
+              key={index}
+              to={`/${project.projectSlug}`}
               className="project-card"
-              onClick={() => handleProjectClick(project)}
-              style={{ cursor: (project.externalUrl || (project.projectKey && projectDetails[project.projectKey])) ? 'pointer' : 'default' }}
+              style={{ textDecoration: 'none', display: 'block' }}
             >
               <div className="project-header">
                 <div className="project-icon">
@@ -98,21 +75,15 @@ function ProjectsShowcase() {
                 </div>
               )}
               
-              {(project.externalUrl || (project.projectKey && projectDetails[project.projectKey])) && (
+              {project.projectKey && projectDetails[project.projectKey] && (
                 <div className="project-link">
-                  {project.externalUrl ? 'View Project →' : 'View Details →'}
+                  View Details →
                 </div>
               )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>
-
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
     </section>
   );
 }
