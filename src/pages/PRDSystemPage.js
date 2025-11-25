@@ -1,31 +1,11 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import projectDetails from '../data/projectDetails';
 import './ProjectDetailPage.css';
 
-function ProjectDetailPage() {
-  const { projectName } = useParams();
+function PRDSystemPage() {
   const navigate = useNavigate();
-
-  // Convert URL slug to project key (e.g., 'sighedkick' -> 'SighedKick')
-  const projectKey = Object.keys(projectDetails).find(
-    key => key.toLowerCase() === projectName.toLowerCase()
-  );
-
-  const project = projectKey ? projectDetails[projectKey] : null;
-
-  if (!project) {
-    return (
-      <div className="project-detail-page">
-        <div className="project-detail-container">
-          <h1>Project Not Found</h1>
-          <button onClick={() => navigate('/')} className="back-button">
-            ← Back to Home
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const project = projectDetails['PRDSystem'];
 
   return (
     <div className="project-detail-page">
@@ -181,5 +161,5 @@ function ProjectDetailPage() {
   );
 }
 
-export default ProjectDetailPage;
+export default PRDSystemPage;
 

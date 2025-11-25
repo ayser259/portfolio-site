@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
-import ProjectDetailPage from './pages/ProjectDetailPage';
+import SighedKickPage from './pages/SighedKickPage';
+import ByteMePage from './pages/ByteMePage';
+import CKFDPage from './pages/CKFDPage';
+import EmptyMyInboxPage from './pages/EmptyMyInboxPage';
+import PRDSystemPage from './pages/PRDSystemPage';
 
 function HomePage() {
   const videoRef = useRef(null);
@@ -112,7 +116,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/:projectName" element={<ProjectDetailPage />} />
+        <Route path="/sighedkick" element={<SighedKickPage />} />
+        <Route path="/bytem" element={<ByteMePage />} />
+        <Route path="/ckfd" element={<CKFDPage />} />
+        <Route path="/emptymyinbox" element={<EmptyMyInboxPage />} />
+        <Route path="/prdsystem" element={<PRDSystemPage />} />
       </Routes>
     </Router>
   );
