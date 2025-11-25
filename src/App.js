@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
+import ContactSection from './components/ContactSection';
 import SighedKickPage from './pages/SighedKickPage';
 import ByteMePage from './pages/ByteMePage';
 import CKFDPage from './pages/CKFDPage';
@@ -107,6 +108,9 @@ function HomePage() {
       
       {/* Projects Showcase Section */}
       <ProjectsShowcase />
+      
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   );
 }
