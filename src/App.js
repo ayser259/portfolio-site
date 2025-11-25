@@ -4,11 +4,14 @@ import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
 import ContactSection from './components/ContactSection';
+import PageTitle from './components/PageTitle';
+import GoogleAnalytics from './components/GoogleAnalytics';
 import SighedKickPage from './pages/SighedKickPage';
 import ByteMePage from './pages/ByteMePage';
 import CKFDPage from './pages/CKFDPage';
 import EmptyMyInboxPage from './pages/EmptyMyInboxPage';
 import PRDSystemPage from './pages/PRDSystemPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function HomePage() {
   const videoRef = useRef(null);
@@ -115,9 +118,11 @@ function HomePage() {
   );
 }
 
-function App() {
+function AppRoutes() {
   return (
-    <Router>
+    <>
+      <PageTitle />
+      <GoogleAnalytics />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/sighedkick" element={<SighedKickPage />} />
@@ -125,7 +130,16 @@ function App() {
         <Route path="/ckfd" element={<CKFDPage />} />
         <Route path="/emptymyinbox" element={<EmptyMyInboxPage />} />
         <Route path="/prdsystem" element={<PRDSystemPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppRoutes />
     </Router>
   );
 }
