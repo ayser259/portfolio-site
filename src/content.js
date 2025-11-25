@@ -116,6 +116,30 @@ const siteContent = {
                 link: "#"
             },
             {
+                icon: "fa-mobile-alt",
+                iconColor: "cyan-400",
+                title: "ByteMe",
+                description: "A native iOS nutrition tracker that borrows patterns from financial monitoring—turning daily food logging into a clean, insight-driven experience.",
+                technologies: ["Swift", "SwiftUI", "iOS"],
+                link: "#"
+            },
+            {
+                icon: "fa-chart-line",
+                iconColor: "purple-400",
+                title: "Financial Wellness Demos",
+                description: "An interactive React demo that simulates a full financial wellness experience: credit scores, cash flow, education, gamification, and personalized insights.",
+                technologies: ["React", "TypeScript", "MUI"],
+                link: "#"
+            },
+            {
+                icon: "fa-file-alt",
+                iconColor: "cyan-400",
+                title: "AI-Assisted PRD Workflow",
+                description: "A lightweight, GenAI-powered workflow that turns messy, spoken ideas into clean, structured PRDs using voice transcripts, targeted AI prompts, and guided refinement.",
+                technologies: ["GenAI", "Workflow Design", "Product Management"],
+                link: "#"
+            },
+            {
                 icon: "fa-database",
                 iconColor: "purple-400",
                 title: "Systems & Analytics Foundations",
