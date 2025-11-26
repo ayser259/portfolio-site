@@ -110,7 +110,7 @@ function HomePage() {
   return (
     <div className="App">
       {/* Hero Section with Video Background */}
-      <section className="hero-section">
+      <section className={`hero-section ${isModalOpen ? 'modal-open' : ''}`}>
         <video 
           id="bgVideo"
           ref={videoRef}
