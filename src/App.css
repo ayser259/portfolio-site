@@ -52,6 +52,46 @@ body {
               transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.audio-toggle {
+  position: absolute;
+  top: 16px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.audio-toggle-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Default: keep near the top-right on small screens */
+.audio-toggle {
+  right: 16px;
+}
+
+/* On larger screens where the modal occupies ~700px on the right,
+   shift the button left so it stays over the visible video area */
+@media (min-width: 1024px) {
+  .audio-toggle {
+    right: 720px;
+  }
+}
+
+.audio-toggle:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
 /* Mobile: video stays at top when modal opens */
 @media (max-width: 768px) {
   #bgVideo {

@@ -16,6 +16,7 @@ import NotFoundPage from './pages/NotFoundPage';
 function HomePage() {
   const videoRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAudioOn, setIsAudioOn] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -89,6 +90,23 @@ function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleToggleAudio = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const nextIsAudioOn = !isAudioOn;
+    // Autoplay rules: keep muted on load, allow unmuting after user interaction
+    video.muted = !nextIsAudioOn;
+
+    if (nextIsAudioOn) {
+      video.play().catch((error) => {
+        console.log('Video play failed after unmuting:', error);
+      });
+    }
+
+    setIsAudioOn(nextIsAudioOn);
+  };
+
   return (
     <div className="App">
       {/* Hero Section with Video Background */}
@@ -106,6 +124,18 @@ function HomePage() {
           <source src="/assets/images/background/full_background_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <button
+          type="button"
+          className="audio-toggle"
+          onClick={handleToggleAudio}
+          aria-label={isAudioOn ? 'Mute background video' : 'Unmute background video'}
+        >
+          <img
+            src={isAudioOn ? '/assets/images/background/unmuted.png' : '/assets/images/background/muted.png'}
+            alt={isAudioOn ? 'Audio on' : 'Audio off'}
+            className="audio-toggle-icon"
+          />
+        </button>
         <TerminalModal isOpen={isModalOpen} onOpen={() => setIsModalOpen(true)} />
       </section>
       
