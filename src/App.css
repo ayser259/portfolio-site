@@ -56,7 +56,7 @@ body {
   position: absolute;
   top: 16px;
   right: 16px;
-  z-index: 2;
+  z-index: 200;
   width: 32px;
   height: 32px;
   border-radius: 999px;
@@ -95,6 +95,10 @@ body {
   /* Ensure scroll snap works on mobile */
   html {
     -webkit-overflow-scrolling: touch;
+  }
+
+  .hero-section.modal-open .audio-toggle {
+    right: 16px;
   }
 }
 

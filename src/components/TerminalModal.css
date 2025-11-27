@@ -72,8 +72,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 18px;
+  font-family: 'SF Pro Rounded', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI Rounded', 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 20px;
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -81,7 +81,7 @@
 
 .terminal-content {
   flex: 1;
-  padding: 3rem 3.5rem;
+  padding: 3rem 3.5rem calc(3rem + 35vh);
   overflow-y: auto;
   color: rgba(255, 255, 255, 0.92);
   scrollbar-width: thin;
@@ -109,9 +109,9 @@
 .typed-text {
   color: rgba(255, 255, 255, 0.92);
   line-height: 1.85;
-  font-weight: 400;
-  font-size: 18px;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.01em;
   white-space: pre-wrap;
   word-wrap: break-word;
   text-rendering: optimizeLegibility;
@@ -134,10 +134,13 @@
 }
 
 /* Skip Typing Button */
+.terminal-controls-row {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .skip-typing-button {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -181,6 +184,12 @@
   letter-spacing: 0.02em;
 }
 
+.skip-icon-image {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
 /* Choice Chips Container */
 .choice-chips-container {
   margin-top: 2.5rem;
@@ -199,7 +208,7 @@
 
 .choice-chips {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.75rem;
   width: 100%;
 }
@@ -207,15 +216,15 @@
 .choice-chip {
   display: flex;
   align-items: center;
-  padding: 1rem 1.25rem;
-  background: var(--glass-bg);
+  padding: 0.65rem 1rem;
+  background: rgba(12, 18, 20, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 15px;
-  font-weight: 400;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   text-align: left;
   cursor: pointer;
@@ -226,28 +235,35 @@
 }
 
 .choice-chip::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--primary-green);
-  transform: scaleY(0);
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  content: '➤';
+  margin-right: 0.5rem;
+  font-size: 12px;
+  color: var(--primary-green);
+  opacity: 0.8;
+  position: static;
+  transform: none;
+  transition: none;
 }
 
 .choice-chip:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--primary-green-transparent-medium);
-  transform: translateX(4px);
+  transform: translateY(-1px);
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.2),
     0 0 20px rgba(0, 255, 136, 0.1);
 }
 
-.choice-chip:hover::before {
-  transform: scaleY(1);
+.choice-chip.completed {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.choice-chip.completed:hover {
+  background: rgba(12, 18, 20, 0.8);
+  transform: none;
 }
 
 .choice-chip.selected {
@@ -260,7 +276,7 @@
 }
 
 .choice-chip.selected::before {
-  transform: scaleY(1);
+  opacity: 1;
 }
 
 
@@ -301,17 +317,40 @@
     transform: translateY(0);
   }
   
+  .terminal-grip-area {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    touch-action: pan-y;
+  }
+
+  .terminal-grip {
+    width: 48px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  
   .terminal {
-    font-size: 16px;
+    font-size: 17px;
     max-height: 85vh;
   }
   
   .terminal-content {
-    padding: 2rem 2.5rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .typed-text {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.8;
   }
 
@@ -333,8 +372,8 @@
   }
 
   .choice-chip {
-    padding: 0.875rem 1rem;
-    font-size: 14px;
+    padding: 0.6rem 0.9rem;
+    font-size: 13px;
   }
 }
 

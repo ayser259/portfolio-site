@@ -4,7 +4,7 @@
 const siteContent = {
     // Site metadata
     site: {
-        title: "Ayser – Product Manager & Systems Builder",
+        title: "Ayser C – Product Manager & Systems Builder",
         name: "Ayser",
         tagline: "Product Manager · Systems Builder · Storyteller"
     },
@@ -13,36 +13,17 @@ const siteContent = {
     terminal: {
         prompt: "ayser@portfolio:~$",
         messages: [
-            "$ initializing portfolio.exe...",
-            "$ booting systems_builder.ts",
             "",
-            "> Hey, I'm Ayser 👋",
-            "> Staff Product Manager & systems builder",
-            "> currently leading Discovery at Credit Karma",
+            "Hi, I'm Ayser 👋",
             "",
-            "> I design products that move the needle",
-            "> blending data, experimentation, and storytelling",
+            "I'm a Product Lead and builder based in San Francisco, CA.",
             "",
-            "> I've led full-app redesigns, growth experiments,",
-            "> and data platform work for 100M+ members",
+            "This site is a snapshot of who I am, how I think, what I build, and what I like.",
             "",
-            "> Previously: founder during grad school at Waterloo",
-            "> Always: builder, writer, and board game nerd",
-            "",
-            "> Focus areas:",
-            "  • Product strategy & discovery",
-            "  • Growth & experimentation",
-            "  • Systems design & data platforms",
-            "  • Gen AI-powered product experiences",
-            "",
-            "> This site is a snapshot of what I build,",
-            "> how I think, and what I ship.",
-            "",
-            "> Scroll to explore the work",
-            "> Or reach out if you want to build together",
-            "",
-            "$ portfolio_loaded successfully ✓"
+            "Where should we start?",
+            ""
         ]
+        
     },
 
     // About section
