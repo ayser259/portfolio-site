@@ -1,11 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import projectDetails from '../data/projectDetails';
+import ImageModal from '../components/ImageModal';
 import './ProjectDetailPage.css';
 
 function EmptyMyInboxPage() {
   const navigate = useNavigate();
   const project = projectDetails['EmptyMyInbox'];
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Helper function to render text with proper bullet point lists
+  const renderTextWithBullets = (text) => {
+    if (!text) return null;
+    
+    const lines = text.split('\n');
+    const elements = [];
+    let currentList = [];
+    let currentParagraph = [];
+
+    const flushParagraph = () => {
+      if (currentParagraph.length > 0) {
+        elements.push(
+          <p key={`p-${elements.length}`}>{currentParagraph.join(' ')}</p>
+        );
+        currentParagraph = [];
+      }
+    };
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={`ul-${elements.length}`}>
+            {currentList.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    lines.forEach((line, idx) => {
+      const trimmedLine = line.trim();
+      
+      if (!trimmedLine) {
+        flushList();
+        flushParagraph();
+        return;
+      }
+
+      // Check if line starts with a bullet point (dash or numbered)
+      if (trimmedLine.match(/^[-•]\s/) || trimmedLine.match(/^\d+\.\s/)) {
+        flushParagraph();
+        const bulletText = trimmedLine.replace(/^[-•]\s/, '').replace(/^\d+\.\s/, '').trim();
+        if (bulletText) {
+          currentList.push(bulletText);
+        }
+      } else {
+        flushList();
+        if (trimmedLine) {
+          currentParagraph.push(trimmedLine);
+        }
+      }
+    });
+
+    flushList();
+    flushParagraph();
+
+    return elements.length > 0 ? elements : null;
+  };
 
   const screenshots = [
     {
@@ -38,7 +101,10 @@ function EmptyMyInboxPage() {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
-        <button onClick={() => navigate('/')} className="back-button">
+        <button
+          onClick={() => navigate('/', { state: { scrollToProjects: true } })}
+          className="back-button"
+        >
           ← Back to Home
         </button>
 
@@ -50,99 +116,65 @@ function EmptyMyInboxPage() {
         </div>
 
         <div className="project-detail-body">
-          <div className="project-detail-layout">
-            <div className="project-detail-media-column">
-              {demoEmbedUrl && (
-                <section className="project-detail-media-section">
-                  <h2 className="project-detail-media-title">Walkthrough</h2>
-                  <div className="project-detail-video-wrapper">
-                    <iframe
-                      src={demoEmbedUrl}
-                      title="Empty my Inbox walkthrough"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <p className="project-detail-video-caption">
-                    A walkthrough of how I use Empty my Inbox to hit Inbox Zero across multiple accounts.
-                  </p>
-                </section>
-              )}
-
-              {screenshots.length > 0 && (
-                <section className="project-detail-media-section project-detail-gallery">
-                  <h2 className="project-detail-media-title">Screens & Flows</h2>
-                  <div className="project-detail-gallery-grid">
-                    {screenshots.map((shot) => (
-                      <figure key={shot.src} className="project-detail-gallery-item">
-                        <img src={shot.src} alt={shot.alt} />
-                        {shot.caption && (
-                          <figcaption className="project-detail-gallery-caption">
-                            {shot.caption}
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
-                  </div>
-                </section>
-              )}
-            </div>
-
-            <div className="project-detail-content-column">
-              {project.overview && (
-                <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">Overview</h2>
-                  <div className="project-detail-text">
-                    {project.overview.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              <div className="project-detail-meta">
-                {project.type && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Type:</span>
-                    <span className="project-detail-meta-value">{project.type}</span>
-                  </div>
-                )}
-                {project.role && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Role:</span>
-                    <span className="project-detail-meta-value">{project.role}</span>
-                  </div>
-                )}
-                {project.stack && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Stack:</span>
-                    <span className="project-detail-meta-value">{project.stack}</span>
-                  </div>
-                )}
-                {project.tech && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Tech:</span>
-                    <span className="project-detail-meta-value">{project.tech}</span>
-                  </div>
-                )}
-                {project.status && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Status:</span>
-                    <span className="project-detail-meta-value">{project.status}</span>
-                  </div>
-                )}
+          {/* Overview at the top */}
+          {project.overview && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">Overview</h2>
+              <div className="project-detail-text">
+                {renderTextWithBullets(project.overview)}
               </div>
+            </section>
+          )}
 
-              {project.problem && (
-                <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">The Problem & Spark</h2>
-                  <div className="project-detail-text">
-                    {project.problem.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
-                  </div>
-                </section>
-              )}
+          {/* Walkthrough */}
+          {demoEmbedUrl && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">Walkthrough</h2>
+              <div className="project-detail-video-wrapper">
+                <iframe
+                  src={demoEmbedUrl}
+                  title="Empty my Inbox walkthrough"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <p className="project-detail-video-caption">
+                A walkthrough of how I use Empty my Inbox to hit Inbox Zero across multiple accounts.
+              </p>
+            </section>
+          )}
+
+          {/* Problem & Spark */}
+          {project.problem && (
+            <section className="project-detail-section">
+              <h2 className="project-detail-section-title">The Problem & Spark</h2>
+              <div className="project-detail-text">
+                {renderTextWithBullets(project.problem)}
+              </div>
+            </section>
+          )}
+
+          {/* Screens & Flows */}
+          {screenshots.length > 0 && (
+            <section className="project-detail-section project-detail-gallery">
+              <h2 className="project-detail-section-title">Screens & Flows</h2>
+              <div className="project-detail-gallery-grid">
+                {screenshots.map((shot) => (
+                  <figure key={shot.src} className="project-detail-gallery-item" onClick={() => setSelectedImage(shot.src)}>
+                    <img src={shot.src} alt={shot.alt} style={{ cursor: 'pointer' }} />
+                    {shot.caption && (
+                      <figcaption className="project-detail-gallery-caption">
+                        {shot.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <div className="project-detail-layout">
+            <div className="project-detail-content-column">
 
               {project.features && Object.keys(project.features).length > 0 && (
                 <section className="project-detail-section">
@@ -151,9 +183,7 @@ function EmptyMyInboxPage() {
                     <div key={featureName} className="project-detail-feature-item">
                       <h3 className="project-detail-feature-title">{featureName}</h3>
                       <div className="project-detail-text">
-                        {featureDesc.split('\n').map((paragraph, idx) => (
-                          <p key={idx}>{paragraph}</p>
-                        ))}
+                        {renderTextWithBullets(featureDesc)}
                       </div>
                     </div>
                   ))}
@@ -164,9 +194,7 @@ function EmptyMyInboxPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Future Vision</h2>
                   <div className="project-detail-text">
-                    {project.futureVision.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.futureVision)}
                   </div>
                 </section>
               )}
@@ -175,9 +203,7 @@ function EmptyMyInboxPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">How I Built It</h2>
                   <div className="project-detail-text">
-                    {project.architecture.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.architecture)}
                   </div>
                 </section>
               )}
@@ -186,9 +212,7 @@ function EmptyMyInboxPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Design Principles</h2>
                   <div className="project-detail-text">
-                    {project.designPrinciples.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.designPrinciples)}
                   </div>
                 </section>
               )}
@@ -197,9 +221,7 @@ function EmptyMyInboxPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Impact</h2>
                   <div className="project-detail-text">
-                    {project.outcomes.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.outcomes)}
                   </div>
                 </section>
               )}
@@ -226,6 +248,12 @@ function EmptyMyInboxPage() {
           )}
         </div>
       </div>
+      <ImageModal
+        imageSrc={selectedImage}
+        imageAlt=""
+        isOpen={!!selectedImage}
+        onClose={() => setSelectedImage(null)}
+      />
     </div>
   );
 }

@@ -1,11 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import projectDetails from '../data/projectDetails';
+import ImageModal from '../components/ImageModal';
 import './ProjectDetailPage.css';
 
 function ByteMePage() {
   const navigate = useNavigate();
   const project = projectDetails['ByteMe'];
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Helper function to render text with proper bullet point lists
+  const renderTextWithBullets = (text) => {
+    if (!text) return null;
+    
+    const lines = text.split('\n');
+    const elements = [];
+    let currentList = [];
+    let currentParagraph = [];
+
+    const flushParagraph = () => {
+      if (currentParagraph.length > 0) {
+        elements.push(
+          <p key={`p-${elements.length}`}>{currentParagraph.join(' ')}</p>
+        );
+        currentParagraph = [];
+      }
+    };
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={`ul-${elements.length}`}>
+            {currentList.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    lines.forEach((line, idx) => {
+      const trimmedLine = line.trim();
+      
+      if (!trimmedLine) {
+        flushList();
+        flushParagraph();
+        return;
+      }
+
+      // Check if line starts with a bullet point (dash or numbered)
+      if (trimmedLine.match(/^[-•]\s/) || trimmedLine.match(/^\d+\.\s/)) {
+        flushParagraph();
+        const bulletText = trimmedLine.replace(/^[-•]\s/, '').replace(/^\d+\.\s/, '').trim();
+        if (bulletText) {
+          currentList.push(bulletText);
+        }
+      } else {
+        flushList();
+        if (trimmedLine) {
+          currentParagraph.push(trimmedLine);
+        }
+      }
+    });
+
+    flushList();
+    flushParagraph();
+
+    return elements.length > 0 ? elements : null;
+  };
 
   const screenshots = [
     {
@@ -58,7 +121,10 @@ function ByteMePage() {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
-        <button onClick={() => navigate('/')} className="back-button">
+        <button
+          onClick={() => navigate('/', { state: { scrollToProjects: true } })}
+          className="back-button"
+        >
           ← Back to Home
         </button>
 
@@ -72,6 +138,15 @@ function ByteMePage() {
         <div className="project-detail-body">
           <div className="project-detail-layout">
             <div className="project-detail-media-column">
+              {project.overview && (
+                <section className="project-detail-section">
+                  <h2 className="project-detail-section-title">Overview</h2>
+                  <div className="project-detail-text">
+                    {renderTextWithBullets(project.overview)}
+                  </div>
+                </section>
+              )}
+
               {demoEmbedUrl && (
                 <section className="project-detail-media-section">
                   <h2 className="project-detail-media-title">Walkthrough</h2>
@@ -94,8 +169,8 @@ function ByteMePage() {
                   <h2 className="project-detail-media-title">Screens & Flows</h2>
                   <div className="project-detail-gallery-grid">
                     {screenshots.map((shot) => (
-                      <figure key={shot.src} className="project-detail-gallery-item">
-                        <img src={shot.src} alt={shot.alt} />
+                      <figure key={shot.src} className="project-detail-gallery-item" onClick={() => setSelectedImage(shot.src)}>
+                        <img src={shot.src} alt={shot.alt} style={{ cursor: 'pointer' }} />
                         {shot.caption && (
                           <figcaption className="project-detail-gallery-caption">
                             {shot.caption}
@@ -109,57 +184,11 @@ function ByteMePage() {
             </div>
 
             <div className="project-detail-content-column">
-              {project.overview && (
-                <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">Overview</h2>
-                  <div className="project-detail-text">
-                    {project.overview.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              <div className="project-detail-meta">
-                {project.type && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Type:</span>
-                    <span className="project-detail-meta-value">{project.type}</span>
-                  </div>
-                )}
-                {project.role && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Role:</span>
-                    <span className="project-detail-meta-value">{project.role}</span>
-                  </div>
-                )}
-                {project.stack && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Stack:</span>
-                    <span className="project-detail-meta-value">{project.stack}</span>
-                  </div>
-                )}
-                {project.tech && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Tech:</span>
-                    <span className="project-detail-meta-value">{project.tech}</span>
-                  </div>
-                )}
-                {project.status && (
-                  <div className="project-detail-meta-item">
-                    <span className="project-detail-meta-label">Status:</span>
-                    <span className="project-detail-meta-value">{project.status}</span>
-                  </div>
-                )}
-              </div>
-
               {project.problem && (
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Problem & Inspiration</h2>
                   <div className="project-detail-text">
-                    {project.problem.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.problem)}
                   </div>
                 </section>
               )}
@@ -171,9 +200,7 @@ function ByteMePage() {
                     <div key={featureName} className="project-detail-feature-item">
                       <h3 className="project-detail-feature-title">{featureName}</h3>
                       <div className="project-detail-text">
-                        {featureDesc.split('\n').map((paragraph, idx) => (
-                          <p key={idx}>{paragraph}</p>
-                        ))}
+                        {renderTextWithBullets(featureDesc)}
                       </div>
                     </div>
                   ))}
@@ -184,9 +211,7 @@ function ByteMePage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Future Roadmap</h2>
                   <div className="project-detail-text">
-                    {project.futureVision.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.futureVision)}
                   </div>
                 </section>
               )}
@@ -195,9 +220,7 @@ function ByteMePage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">How I Built It</h2>
                   <div className="project-detail-text">
-                    {project.architecture.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.architecture)}
                   </div>
                 </section>
               )}
@@ -206,9 +229,7 @@ function ByteMePage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Design Principles</h2>
                   <div className="project-detail-text">
-                    {project.designPrinciples.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.designPrinciples)}
                   </div>
                 </section>
               )}
@@ -217,9 +238,7 @@ function ByteMePage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">What I Learned</h2>
                   <div className="project-detail-text">
-                    {project.outcomes.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.outcomes)}
                   </div>
                 </section>
               )}
@@ -246,6 +265,12 @@ function ByteMePage() {
           )}
         </div>
       </div>
+      <ImageModal
+        imageSrc={selectedImage}
+        imageAlt=""
+        isOpen={!!selectedImage}
+        onClose={() => setSelectedImage(null)}
+      />
     </div>
   );
 }

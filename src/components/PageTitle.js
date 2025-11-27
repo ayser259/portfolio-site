@@ -8,8 +8,8 @@ function PageTitle() {
   useEffect(() => {
     const projectTitles = {
       '/sighedkick': 'SighedKick - Ayser Choudhury',
-      '/bytem': 'ByteMe - Ayser Choudhury',
-      '/ckfd': 'Financial Wellness Demos - Ayser Choudhury',
+      '/byteme': 'ByteMe - Ayser Choudhury',
+      '/vibe-code-demo-app': 'Demo App: Personalized Feed Engagement - Ayser Choudhury',
       '/emptymyinbox': 'Empty My Inbox - Ayser Choudhury',
       '/prdsystem': 'AI-Assisted PRD Workflow - Ayser Choudhury'
     };

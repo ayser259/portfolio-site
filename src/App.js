@@ -1,16 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
 import ContactSection from './components/ContactSection';
 import PageTitle from './components/PageTitle';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import ScrollToTop from './components/ScrollToTop';
 import SighedKickPage from './pages/SighedKickPage';
 import ByteMePage from './pages/ByteMePage';
 import CKFDPage from './pages/CKFDPage';
 import EmptyMyInboxPage from './pages/EmptyMyInboxPage';
 import PRDSystemPage from './pages/PRDSystemPage';
+import CanadianEconomyPage from './pages/CanadianEconomyPage';
+import KakeiboPage from './pages/KakeiboPage';
+import UWEngineeringProgramClassifierPage from './pages/UWEngineeringProgramClassifierPage';
+import UWPlacementQuizPage from './pages/UWPlacementQuizPage';
+import MakingYourOwnCopilotPage from './pages/MakingYourOwnCopilotPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function HomePage() {
@@ -19,6 +25,24 @@ function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAudioOn, setIsAudioOn] = useState(false);
   const [hasIntroCompleted, setHasIntroCompleted] = useState(false);
+  const location = useLocation();
+
+  // When navigating to "/" with a "#projects-showcase" hash (or explicit state),
+  // automatically scroll to the projects section.
+  useEffect(() => {
+    if (
+      location?.hash === '#projects-showcase' ||
+      (location?.state && location.state.scrollToProjects)
+    ) {
+      const projectsSection = document.getElementById('projects-showcase');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -188,15 +212,21 @@ function HomePage() {
 function AppRoutes() {
   return (
     <>
+      <ScrollToTop />
       <PageTitle />
       <GoogleAnalytics />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/sighedkick" element={<SighedKickPage />} />
-        <Route path="/bytem" element={<ByteMePage />} />
-        <Route path="/ckfd" element={<CKFDPage />} />
+        <Route path="/byteme" element={<ByteMePage />} />
+        <Route path="/vibe-code-demo-app" element={<CKFDPage />} />
         <Route path="/emptymyinbox" element={<EmptyMyInboxPage />} />
         <Route path="/prdsystem" element={<PRDSystemPage />} />
+        <Route path="/canadianeconomy" element={<CanadianEconomyPage />} />
+        <Route path="/kakeibo" element={<KakeiboPage />} />
+        <Route path="/uwengineeringprogramclassifier" element={<UWEngineeringProgramClassifierPage />} />
+        <Route path="/uwplacementquiz" element={<UWPlacementQuizPage />} />
+        <Route path="/makingyourowncopilot" element={<MakingYourOwnCopilotPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

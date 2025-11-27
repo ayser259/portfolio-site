@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectsShowcase.css';
 import siteContent from '../content';
@@ -11,21 +11,63 @@ function ProjectsShowcase() {
     'Sighed Kick (Gen AI Writing Partner)': 'SighedKick',
     'Empty My Inbox': 'EmptyMyInbox',
     'ByteMe': 'ByteMe',
-    'Financial Wellness Demos': 'CKFD',
-    'AI-Assisted PRD Workflow': 'PRDSystem'
+    'Demo App: Personalized Feed Engagement': 'CKFD',
+    'AI-Assisted PRD Workflow': 'PRDSystem',
+    'ZIRP-era Canadian Economic Analysis (2008–2019)': 'CanadianEconomy',
+    'Kakeibo': 'Kakeibo',
+    'Engineering Fit Classifier': 'UWEngineeringProgramClassifier',
+    'What Type of Engineering Should I Study?': 'UWPlacementQuiz',
+    'Making Your Own AI Copilot': 'MakingYourOwnCopilot'
+  };
+
+  const projectSubtitleMap = {
+    SighedKick: 'My personal GenAI copilot and systems lab',
+    EmptyMyInbox: 'A systems-first path to Inbox Zero',
+    ByteMe: 'Applying fintech monitoring patterns to nutrition',
+    CKFD: 'A mobile-first prototype for financial wellness',
+    PRDSystem: 'From brain dump to structured PRDs with AI',
+    CanadianEconomy: 'An interactive data story for macro trends',
+    Kakeibo: 'Budgeting through a kakeibo-inspired lens',
+    UWEngineeringProgramClassifier: 'Exploring program fit with an ML model',
+    UWPlacementQuiz: 'A quiz-style way to explore program fit',
+    MakingYourOwnCopilot: 'A hands-on workshop for building personalized GenAI systems'
   };
 
   const projectImageMap = {
-    SighedKick: '/projects/Sighedkick/SighedKick-Library.png',
-    EmptyMyInbox: '/projects/EmptyMyInbox/EmptyMyInbox-Home.png',
-    ByteMe: '/projects/ByteMe/ByteMe-Dashboard1.png',
+    SighedKick: '/projects/Sighedkick/logo.png',
+    EmptyMyInbox: '/projects/EmptyMyInbox/logo.png',
+    ByteMe: '/projects/ByteMe/logo.png',
     CKFD: null,
-    PRDSystem: null
+    PRDSystem: null,
+    CanadianEconomy: null,
+    Kakeibo: null,
+    UWEngineeringProgramClassifier: null,
+    UWPlacementQuiz: null,
+    MakingYourOwnCopilot: null
+  };
+
+  const projectThemesMap = {
+    SighedKick: ['Gen AI', 'Systems', 'Workflows', 'Exploration', 'Software Engineering', 'Web', 'UX'],
+    EmptyMyInbox: ['Systems', 'Workflows', 'Software Engineering', 'UX', 'Mobile', 'Gen AI'],
+    ByteMe: ['Mobile', 'UX', 'Exploration', 'Software Engineering', 'Data Science'],
+    CKFD: ['Mobile', 'UX', 'Exploration', 'Gen AI', 'Workshops'],
+    PRDSystem: ['Gen AI', 'Workflows', 'Workshops'],
+    CanadianEconomy: ['Data Science', 'Exploration'],
+    Kakeibo: ['Mobile', 'UX', 'Exploration'],
+    UWEngineeringProgramClassifier: ['Data Science'],
+    UWPlacementQuiz: ['Software Engineering', 'UX', 'Web'],
+    MakingYourOwnCopilot: ['Workshops', 'Systems', 'Workflows', 'Gen AI']
   };
 
   // Helper function to convert project key to URL slug
   const getProjectSlug = (projectKey) => {
-    return projectKey.toLowerCase();
+    // Custom slug mappings for projects with non-standard URLs
+    const customSlugs = {
+      'CKFD': 'vibe-code-demo-app',
+      'ByteMe': 'byteme'
+    };
+    
+    return customSlugs[projectKey] || projectKey.toLowerCase();
   };
 
   // Filter and map projects to only include those with summaries in projectHomeSummaries
@@ -48,47 +90,107 @@ function ProjectsShowcase() {
         technologies: summary.technologies || project.technologies,
         projectKey: projectKey, // Store the key for modal lookup
         projectSlug: getProjectSlug(projectKey), // URL slug for routing
-        thumbnail: projectImageMap[projectKey] || null
+        thumbnail: projectImageMap[projectKey] || null,
+        subtitle: projectSubtitleMap[projectKey] || projectDetails[projectKey]?.subtitle || '',
+        themes: projectThemesMap[projectKey] || []
       };
     });
+
+  const [selectedThemes, setSelectedThemes] = useState([]);
+
+  const allThemes = Array.from(
+    new Set(
+      allProjects.flatMap((project) => project.themes || [])
+    )
+  ).sort();
+
+  const toggleTheme = (theme) => {
+    setSelectedThemes((prev) =>
+      prev.includes(theme)
+        ? prev.filter((t) => t !== theme)
+        : [...prev, theme]
+    );
+  };
+
+  const clearThemes = () => setSelectedThemes([]);
+
+  const filteredProjects =
+    selectedThemes.length === 0
+      ? allProjects
+      : allProjects.filter(
+          (project) =>
+            project.themes &&
+            project.themes.some((theme) => selectedThemes.includes(theme))
+        );
 
   return (
     <section id="projects-showcase" className="projects-showcase">
       <div className="projects-container">
         <h2 className="projects-title">{siteContent.projects.title}</h2>
+
+        {allThemes.length > 0 && (
+          <div className="projects-filters">
+            <button
+              type="button"
+              onClick={clearThemes}
+              className={`theme-chip theme-chip-all${
+                selectedThemes.length === 0 ? ' theme-chip--active' : ''
+              }`}
+            >
+              All
+            </button>
+            {allThemes.map((theme) => {
+              const isActive = selectedThemes.includes(theme);
+              return (
+                <button
+                  key={theme}
+                  type="button"
+                  onClick={() => toggleTheme(theme)}
+                  className={`theme-chip${isActive ? ' theme-chip--active' : ''}`}
+                >
+                  {theme}
+                </button>
+              );
+            })}
+          </div>
+        )}
         
         <div className="projects-grid">
-          {allProjects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <Link
               key={index}
               to={`/${project.projectSlug}`}
               className="project-card"
               style={{ textDecoration: 'none', display: 'block' }}
             >
-              {project.thumbnail && (
-                <div className="project-card-media">
-                  <img
-                    src={project.thumbnail}
-                    alt={`${project.title} preview`}
-                    className="project-card-image"
-                  />
-                </div>
-              )}
-
               <div className="project-header">
-                <div className="project-icon">
-                  <i className={`fas ${project.icon} ${project.iconColor || 'cyan-400'}`}></i>
-                </div>
+                {project.thumbnail ? (
+                  <div className="project-logo">
+                    <img
+                      src={project.thumbnail}
+                      alt={`${project.title} logo`}
+                      className="project-logo-image"
+                    />
+                  </div>
+                ) : (
+                  <div className="project-icon">
+                    <i className={`fas ${project.icon} ${project.iconColor || 'cyan-400'}`}></i>
+                  </div>
+                )}
                 <h3 className="project-title">{project.title}</h3>
               </div>
               
+              {project.subtitle && (
+                <p className="project-subtitle">{project.subtitle}</p>
+              )}
+
               <p className="project-description">{project.description}</p>
               
-              {project.technologies && project.technologies.length > 0 && (
-                <div className="project-technologies">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-tag">
-                      {tech}
+              {project.themes && project.themes.length > 0 && (
+                <div className="project-themes">
+                  {project.themes.map((theme, themeIndex) => (
+                    <span key={themeIndex} className="theme-tag">
+                      {theme}
                     </span>
                   ))}
                 </div>

@@ -79,6 +79,21 @@ function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
     };
   }, [isOpen]);
 
+  // Signal to parent that the intro + "next steps" are ready.
+  // We treat "intro complete" as the moment when the choice chips are shown,
+  // so the site header appears only after the conversation next steps load.
+  useEffect(() => {
+    if (
+      currentMode === 'initial' &&
+      showChoiceChips &&
+      !hasSignaledIntroCompleteRef.current &&
+      typeof onIntroComplete === 'function'
+    ) {
+      hasSignaledIntroCompleteRef.current = true;
+      onIntroComplete();
+    }
+  }, [currentMode, showChoiceChips, onIntroComplete]);
+
   const resetAll = () => {
     messageIndexRef.current = 0;
     charIndexRef.current = 0;
@@ -161,12 +176,8 @@ function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
     
     // Show appropriate UI after completion
     if (currentMode === 'initial') {
-      // Notify parent that intro has completed (once)
-      if (!hasSignaledIntroCompleteRef.current && typeof onIntroComplete === 'function') {
-        hasSignaledIntroCompleteRef.current = true;
-        onIntroComplete();
-      }
-
+      // After the intro, show the choice chips; onIntroComplete will be
+      // triggered by the showChoiceChips effect so the header appears later.
       setTimeout(() => {
         setShowChoiceChips(true);
       }, 500);
@@ -245,13 +256,8 @@ function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
       
       // Handle completion based on mode
       if (currentMode === 'initial') {
-        // Notify parent that intro has completed (once)
-        if (!hasSignaledIntroCompleteRef.current && typeof onIntroComplete === 'function') {
-          hasSignaledIntroCompleteRef.current = true;
-          onIntroComplete();
-        }
-
-        // Show choice chips after initial message
+        // Show choice chips after initial message; onIntroComplete will be
+        // triggered by the showChoiceChips effect so the header appears later.
         setTimeout(() => {
           setShowChoiceChips(true);
         }, 500);

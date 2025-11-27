@@ -13,12 +13,74 @@ function CKFDPage() {
     return url;
   };
 
+  // Helper function to render text with proper bullet point lists
+  const renderTextWithBullets = (text) => {
+    if (!text) return null;
+    
+    const lines = text.split('\n');
+    const elements = [];
+    let currentList = [];
+    let currentParagraph = [];
+
+    const flushParagraph = () => {
+      if (currentParagraph.length > 0) {
+        elements.push(
+          <p key={`p-${elements.length}`}>{currentParagraph.join(' ')}</p>
+        );
+        currentParagraph = [];
+      }
+    };
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        elements.push(
+          <ul key={`ul-${elements.length}`}>
+            {currentList.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>
+        );
+        currentList = [];
+      }
+    };
+
+    lines.forEach((line, idx) => {
+      const trimmedLine = line.trim();
+      
+      if (!trimmedLine) {
+        flushList();
+        flushParagraph();
+        return;
+      }
+
+      // Check if line starts with a bullet point
+      if (trimmedLine.startsWith('- ')) {
+        flushParagraph();
+        const bulletText = trimmedLine.substring(2).trim();
+        currentList.push(bulletText);
+      } else {
+        flushList();
+        if (trimmedLine) {
+          currentParagraph.push(trimmedLine);
+        }
+      }
+    });
+
+    flushList();
+    flushParagraph();
+
+    return elements.length > 0 ? elements : null;
+  };
+
   const demoEmbedUrl = getEmbedUrl(project.demoLink);
 
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
-        <button onClick={() => navigate('/')} className="back-button">
+        <button
+          onClick={() => navigate('/', { state: { scrollToProjects: true } })}
+          className="back-button"
+        >
           ← Back to Home
         </button>
 
@@ -31,33 +93,48 @@ function CKFDPage() {
 
         <div className="project-detail-body">
           <div className="project-detail-layout">
-            <div className="project-detail-media-column">
-              {demoEmbedUrl && (
-                <section className="project-detail-media-section">
-                  <h2 className="project-detail-media-title">Interactive Demo</h2>
-                  <div className="project-detail-video-wrapper">
-                    <iframe
-                      src={demoEmbedUrl}
-                      title="Financial Wellness Demos"
-                      loading="lazy"
-                    />
-                  </div>
-                  <p className="project-detail-video-caption">
-                    The live React demo I use to align stakeholders around a modern financial wellness experience.
-                  </p>
-                </section>
-              )}
-            </div>
-
             <div className="project-detail-content-column">
               {project.overview && (
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Overview</h2>
                   <div className="project-detail-text">
-                    {project.overview.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.overview)}
                   </div>
+                </section>
+              )}
+
+              {demoEmbedUrl && (
+                <section className="project-detail-media-section">
+                  <h2 className="project-detail-media-title">Interactive Demo</h2>
+                  <div className="project-detail-mobile-frame">
+                    <div className="project-detail-mobile-frame-inner">
+                      <iframe
+                        src={demoEmbedUrl}
+                        title="Personalized Feed Engagement Demo"
+                        loading="lazy"
+                        allow="fullscreen"
+                      />
+                    </div>
+                  </div>
+                  <p className="project-detail-video-caption">
+                    A mobile-first prototype exploring personalized content feeds for financial wellness. Scroll and click around to try it out—explore the feed, tap through modules, and see how personalized content discovery works in practice.
+                  </p>
+                  {project.demoLink && (
+                    <div className="project-detail-cta-card" style={{ marginTop: '1.5rem' }}>
+                      <h3 className="project-detail-cta-title">Try it on your phone</h3>
+                      <p className="project-detail-cta-text">
+                        This demo is designed mobile-first. Open it on your phone for the best experience—swipe through the feed, explore the modules, and see how personalized content discovery feels in practice.
+                      </p>
+                      <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-detail-cta-link"
+                      >
+                        Open the demo app
+                      </a>
+                    </div>
+                  )}
                 </section>
               )}
 
@@ -90,25 +167,21 @@ function CKFDPage() {
 
               {project.problem && (
                 <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">Inspiration & Philosophy</h2>
+                  <h2 className="project-detail-section-title">The Problem</h2>
                   <div className="project-detail-text">
-                    {project.problem.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.problem)}
                   </div>
                 </section>
               )}
 
               {project.features && Object.keys(project.features).length > 0 && (
                 <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">What’s in the Demo Today</h2>
+                  <h2 className="project-detail-section-title">Key Features</h2>
                   {Object.entries(project.features).map(([featureName, featureDesc]) => (
                     <div key={featureName} className="project-detail-feature-item">
                       <h3 className="project-detail-feature-title">{featureName}</h3>
                       <div className="project-detail-text">
-                        {featureDesc.split('\n').map((paragraph, idx) => (
-                          <p key={idx}>{paragraph}</p>
-                        ))}
+                        {renderTextWithBullets(featureDesc)}
                       </div>
                     </div>
                   ))}
@@ -117,11 +190,9 @@ function CKFDPage() {
 
               {project.futureVision && (
                 <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">Where It’s Going</h2>
+                  <h2 className="project-detail-section-title">Where It's Going</h2>
                   <div className="project-detail-text">
-                    {project.futureVision.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.futureVision)}
                   </div>
                 </section>
               )}
@@ -130,20 +201,16 @@ function CKFDPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">How I Built It</h2>
                   <div className="project-detail-text">
-                    {project.architecture.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.architecture)}
                   </div>
                 </section>
               )}
 
               {project.designPrinciples && (
                 <section className="project-detail-section">
-                  <h2 className="project-detail-section-title">Design & Demo Principles</h2>
+                  <h2 className="project-detail-section-title">Design Principles</h2>
                   <div className="project-detail-text">
-                    {project.designPrinciples.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.designPrinciples)}
                   </div>
                 </section>
               )}
@@ -152,9 +219,7 @@ function CKFDPage() {
                 <section className="project-detail-section">
                   <h2 className="project-detail-section-title">Outcomes</h2>
                   <div className="project-detail-text">
-                    {project.outcomes.split('\n').map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
-                    ))}
+                    {renderTextWithBullets(project.outcomes)}
                   </div>
                 </section>
               )}
@@ -166,19 +231,6 @@ function CKFDPage() {
               )}
             </div>
           </div>
-
-          {project.demoLink && (
-            <div className="project-detail-actions">
-              <a
-                href={project.demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-detail-demo-link"
-              >
-                Open interactive demo in a new tab →
-              </a>
-            </div>
-          )}
         </div>
       </div>
     </div>
