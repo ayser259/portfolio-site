@@ -219,38 +219,36 @@ These lessons flow straight back into my work on financial monitoring: how we pr
     demoLink: 'https://www.loom.com/share/9f5c16bc44a84eb9bb24c8d31f9f5f84'
   },
   'CKFD': {
-    title: 'Financial Wellness Demos',
-    subtitle: 'React prototypes for a modern money app',
-    overview: `This project is a financial monitoring and education app demo—a living React prototype that shows what a modern, engaging financial wellness experience could look and feel like.
+    title: 'Demo App: Personalized Feed Engagement',
+    subtitle: 'A mobile-first prototype for financial wellness',
+    overview: `This is a high-fidelity, interactive demo that explores how personalized content feeds can drive engagement in financial wellness apps.
 
-It's not a production app; it's a high-fidelity, interactive sandbox I use to:
-- Explore product directions across monitoring, education, and engagement
-- Align stakeholders around a tangible experience
-- Test content, layouts, and flows before committing real engineering resources
+Built as a living React prototype, it demonstrates a mobile-first experience where users discover relevant financial insights, education, and recommendations through a curated, personalized feed—similar to how social platforms surface content, but tailored to financial health.
 
-The demo simulates a full-stack personal finance platform, including credit tracking, cash flow, education, gamification, and personalized insights, all wrapped in a mobile-first, bottom-nav experience.`,
+The demo showcases:
+- Personalized content discovery based on user financial profile
+- Interactive education modules and bite-sized learning
+- Contextual recommendations and actionable insights
+- Engagement patterns that make financial wellness feel less like homework and more like discovery
+
+It's not a production app; it's a rapid-iteration sandbox for testing product directions, aligning stakeholders, and validating UX patterns before committing engineering resources.`,
     type: 'Interactive demo / design & product exploration tool',
     role: 'Vision, feature design, UX, and implementation in React + TypeScript',
     tech: 'React, TypeScript, MUI, React Router, Vercel',
     status: 'Updated roughly monthly; current version is June 2025',
-    problem: `At some point I realized:
-Sometimes building is better than talking or writing.
+    problem: `Most financial apps treat engagement as an afterthought. They show you your balance, maybe some charts, and expect you to come back regularly—but there's little reason to return unless you're actively managing something.
 
-I often have a lot of ideas for where financial monitoring and education could go—new modules, patterns, and interaction models. But written specs and static Figma frames only go so far:
-- Stakeholders interpret the same spec differently
-- It's hard to feel pacing, overload, or delight from a static mock
-- Users give better feedback when they can tap around something real
+The question: What if financial wellness apps borrowed engagement patterns from platforms that people actually want to use?
 
-So I created this demo app as a rapid-iteration playground:
-- A place to visualize "what this could be" in a way that's clickable and concrete
-- A space to try ideas that might be too early or risky for production
-- A shared artifact that execs, engineers, designers, marketers, and researchers can all react to
+Social feeds work because they surface relevant, timely content. News apps work because they curate what matters to you. Financial apps often feel like dashboards—useful when you need them, but not something you'd open just to explore.
 
-Every few weeks I ship a new version and use it to:
-- Validate ideas quickly — Does this flow feel intuitive? Overwhelming? Boring?
-- Collect real feedback — "Show me where you'd tap next" instead of "what do you think?"
-- Align cross-functional teams — Everyone sees the same vision, on-device
-- Continuously refine — Features can be added, ripped out, or reshaped with minimal overhead`,
+This demo explores a different model:
+- A personalized feed that surfaces relevant financial insights, education, and recommendations
+- Content discovery that feels like browsing, not homework
+- Engagement patterns that make financial wellness feel less like a chore and more like discovery
+- Mobile-first design that works naturally on the device people use most
+
+The goal isn't to gamify finance or turn it into social media. It's to make financial wellness feel as engaging and discoverable as the apps people already love.`,
     features: {
       'Core Financial Tracking': `- Cash Flow Dashboard: Visuals for income, expenses, and net cash flow over time. Emphasis on approachable, story-driven views rather than raw tables.
 - Credit Score Monitoring: Multi-agency view (TransUnion, Equifax, Experian). Historical trends and factor breakdowns to explain why a score looks the way it does.
@@ -302,7 +300,7 @@ Architecture:
 
 In short:
 This project is my "show, don't tell" engine for financial UX and system ideas.`,
-    tagline: 'Financial Wellness Demos - show, don\'t tell for financial UX and system ideas.',
+    tagline: 'A prototype that explores how personalized feeds can make financial wellness feel as engaging as the apps people already love.',
     demoLink: 'https://ckfdjune25.vercel.app/'
   },
   'EmptyMyInbox': {
@@ -505,6 +503,156 @@ At a principal level, it's also a way to:
 - Make that approach transferable to other PMs via prompts and process, not just ad hoc coaching.
 - Demonstrate concrete ways I embed GenAI into team workflows rather than just talking about AI in the abstract.`,
     tagline: 'A reusable, AI-assisted workflow that turns spoken idea dumps into clean, structured PRDs—so PMs can spend more time thinking and less time wrestling with a blank document.'
+  },
+  'CanadianEconomy': {
+    title: 'ZIRP-era Canadian Economic Analysis (2008–2019)',
+    subtitle: 'Exploring macro trends through interactive data',
+    overview: `This is an interactive data story that explores key Canadian macroeconomic indicators from 2008–2019—the ZIRP era.
+
+It was originally built as a Jupyter-driven visualization exported to the web, giving stakeholders and classmates a way to explore charts and relationships in their browser without needing a notebook environment.
+
+The project is less about pixel-perfect UI and more about building a clear, narrative-driven lens on complex economic data.`,
+    type: 'Interactive data visualization',
+    role: 'Analysis, storytelling, and visualization',
+    stack: 'Jupyter, Python, Plotly / matplotlib, HTML, Bootstrap, RequireJS',
+    status: 'Completed academic / exploration project',
+    problem: `Economic reports are often static PDFs or dense tables that make it hard to see trends and relationships at a glance.
+
+This project asked: how can we turn macroeconomic data into something that feels explorable and intuitive for non-economists?`,
+    features: {
+      'Time-Series Dashboards': `Interactive charts that let you see how key indicators move over time, with the ability to focus in on specific periods.`,
+      'Cross-Metric Comparisons': `Side-by-side views of indicators (e.g., GDP, unemployment, inflation) so it’s easy to reason about how they move together.`,
+      'Narrated Structure': `Sections and annotations that guide the reader through what to look at and why it matters, instead of leaving them alone with raw charts.`
+    },
+    outcomes: `This was an early exercise in treating data visualization as a product:
+- Deciding which metrics actually matter
+- Sequencing the narrative so non-experts don’t get lost
+- Using interaction sparingly to clarify, not distract`,
+    tagline: 'Making macroeconomic data feel a little less like a wall of numbers and a little more like a story.',
+    demoLink: '/projects/canadian_economy/canadian_economy.html'
+  },
+  'Kakeibo': {
+    title: 'Kakeibo',
+    subtitle: 'Budgeting with a Japanese money journaling lens',
+    overview: `Kakeibo is a simple, web-based prototype that applies the Japanese "kakeibo" money journaling method to everyday spending.
+
+Instead of starting with charts and categories, it starts with reflection questions and intentional, forward-looking choices.
+
+The goal was to see how much of kakeibo’s analog discipline could be preserved in a lightweight digital experience.`,
+    type: 'Personal finance prototype',
+    role: 'Product design, content, and implementation',
+    stack: 'Python, Jupyter, HTML, Bootstrap, RequireJS',
+    status: 'Completed prototype used as a thinking tool for money habits',
+    problem: `Most budgeting tools drop you directly into numbers: balances, charts, and categories.
+
+Kakeibo starts from a different premise: that how you think about money and the questions you ask yourself each month matter as much as the spreadsheets.`,
+    features: {
+      'Monthly Reflection Flow': `Guided prompts that encourage you to articulate what you want your money to do for you this month, before you start logging anything.`,
+      'Simple Spending Buckets': `Aligns with kakeibo’s traditional buckets (needs, wants, culture, unexpected) instead of hyper-granular categories.`,
+      'Lightweight Visuals': `Charts that are intentionally simple—enough to reinforce the reflection, not enough to become a distraction.`
+    },
+    outcomes: `Kakeibo helped me explore how productized budgeting can borrow from behavior-first practices:
+- How prompts and language shape the experience
+- How much UI you actually need to create accountability
+- Where digital tools should stop so reflection can start`,
+    tagline: 'Bringing an analog money journal sensibility into a small, opinionated digital prototype.',
+    demoLink: '/projects/kakeibo/kakeibo.html'
+  },
+  'UWEngineeringProgramClassifier': {
+    title: 'Engineering Fit Classifier',
+    subtitle: 'Helping students find a fit across engineering programs',
+    overview: `The Engineering Fit Classifier is an interactive demo that uses a simple machine learning model to suggest University of Waterloo engineering programs based on a student’s interests and attributes.
+
+It wraps a small classification model in a browser-based experience so students can answer a few questions and see how different programs line up.`,
+    type: 'Applied ML + UX experiment',
+    role: 'Model design, feature engineering, and demo experience',
+    stack: 'Python, scikit-learn, Jupyter, HTML, Bootstrap, RequireJS',
+    status: 'Completed exploration project',
+    problem: `Choosing an engineering program is high-stakes and often overwhelming.
+
+The project explores: can we use even a simple classifier—not as an oracle—but as a conversation starter that helps students see options they might not have considered?`,
+    features: {
+      'Interactive Questionnaire': `Collects a few key signals (interests, strengths, preferences) through a simple form instead of a long survey.`,
+      'Program Suggestions': `Uses a trained classifier to rank programs and surface a short list of candidates, with an emphasis on explanation over raw scores.`,
+      'What-If Tuning': `Lets users tweak answers and immediately see how recommendations shift, reinforcing that the model is a tool, not a verdict.`
+    },
+    outcomes: `This project reinforced a few ML-as-product lessons:
+- Recommendations need context and caveats, not just scores
+- The UX around a model is as important as the model itself
+- Lightweight prototypes are a fast way to stress-test whether a model actually helps users think better`,
+    tagline: 'A small, opinionated classifier wrapped in a UX that treats recommendations as the start of a conversation, not the end.',
+    demoLink: '/projects/uw_engineering_program_classifier/uw_engineering_program_classifier.html'
+  },
+  'UWPlacementQuiz': {
+    title: 'What Type of Engineering Should I Study?',
+    subtitle: 'A lightweight quiz for exploring program fit',
+    overview: `This project is a browser-based quiz that helps prospective students think through which UW programs might fit them, based on a series of short questions.
+
+It leans more on structured questioning and framing than heavy algorithms, mirroring how a good advisor might walk a student through trade-offs.`,
+    type: 'Interactive quiz / exploration tool',
+    role: 'Question design, scoring rules, and implementation',
+    stack: 'HTML, JavaScript, Bootstrap, RequireJS',
+    status: 'Completed prototype for exploration and conversation',
+    problem: `Prospective students often don't know how to compare programs in a structured way—they're juggling anecdotes, rankings, and vague preferences.
+
+The quiz is an experiment in giving them a more guided way to surface what matters and see how different options align.`,
+    features: {
+      'Short, Structured Quiz': `A sequence of approachable questions about interests, working style, and goals, designed to be completable in a few minutes.`,
+      'Simple Scoring Model': `Deterministic rules that map answers to suggestion buckets, intentionally kept transparent and debuggable.`,
+      'Result Summaries': `High-level recommendations that explain the "why" behind suggestions instead of just naming programs.`
+    },
+    outcomes: `The quiz prototype was a useful sandbox for:
+- Thinking through how to encode qualitative preferences into rules
+- Exploring how much fidelity you actually need in a recommendation to be helpful
+- Testing quiz-style UX patterns for future decision-support tools`,
+    tagline: 'A small quiz that turns fuzzy preferences into a clearer starting point for program exploration.',
+    demoLink: '/projects/uw_placement_quiz/uw_placement_quiz.html'
+  },
+  'MakingYourOwnCopilot': {
+    title: 'Making Your Own AI Copilot',
+    subtitle: 'A hands-on workshop for building personalized GenAI systems',
+    overview: `This is a workshop I designed and delivered to help product managers, engineers, and operators build their own AI copilots—personalized systems that leverage LLMs as context-rich, persistent partners for their work.
+
+The workshop covers the mental models, skills, and practical setup needed to go from "using ChatGPT" to building a reusable, teachable system that actually fits into real workflows.`,
+    type: 'Workshop / Educational content',
+    role: 'Workshop design, content creation, and facilitation',
+    stack: 'Google Slides, Loom, Google Drive, Gemini, ChatGPT',
+    status: 'Delivered at company summits and internal training sessions',
+    problem: `Most people's experience with GenAI is still one-off chats and prompts that get lost in conversation history.
+
+The workshop addresses a few core gaps:
+- People don't have a mental model for what an "AI copilot" actually is beyond "using ChatGPT"
+- There's no clear path from ad-hoc prompting to building reusable, persistent systems
+- Context management, prompt engineering, and workflow design aren't taught as integrated skills
+- Most GenAI training focuses on tool features, not on building systems that fit into real work
+
+The goal: help people build something they'll actually use, not just learn about.`,
+    features: {
+      'Mental Models & Frameworks': `The workshop introduces a clear mental model for thinking about AI copilots as systems—not just tools or prompts. It covers:
+- What makes a copilot "context-rich" and "persistent"
+- How to think about decomposition, context engineering, and prompt engineering as integrated skills
+- When to offload work vs. when to stay in control`,
+      'Hands-On Setup': `Participants walk through setting up their own starter copilot:
+- Creating a "global context" or "about me" document
+- Setting up context-aware GPTs/Gems that leverage that context
+- Building reusable prompts for specific use cases
+- Managing inputs, interactions, and outputs as a system`,
+      'Practical Workflows': `The workshop includes real examples and exercises:
+- Converting voice memos to structured notes
+- Extracting insights from user testing transcripts
+- Creating launch updates from PRDs and operational notes
+- Building repeatable workflows that save time and improve quality`
+    },
+    outcomes: `The workshop has been delivered multiple times and has helped participants:
+- Move from one-off ChatGPT usage to building reusable systems
+- Understand context management and when to refresh vs. extend conversations
+- Create their own copilots that they actually use day-to-day
+- Share patterns and workflows with their teams
+
+It's also become a template for how I think about teaching GenAI skills: start with mental models, then hands-on setup, then real workflows—not just tool tutorials.`,
+    tagline: 'From one-off ChatGPT chats to building a personalized AI copilot you actually use every day.',
+    demoLink: 'https://www.loom.com/share/4ea3dd0a1242494e9fecc2379d48d24f',
+    slidesLink: 'https://docs.google.com/presentation/d/1fXLnj99YAzaVNNEk1pT6gOIQ0lBLrTrpg_KMZZTHEeM/edit'
   }
 };
 

@@ -13,7 +13,7 @@
 }
 
 .contact-container {
-  max-width: 800px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 8rem 2rem;
   text-align: center;
@@ -53,74 +53,96 @@
   gap: 2.5rem;
 }
 
-.contact-email-wrapper {
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 960px;
+  justify-content: center;
+}
+
+.contact-action {
+  flex: 1 1 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 320px;
+  padding: 1.75rem 1.5rem;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.08), transparent 55%),
+              radial-gradient(circle at bottom right, rgba(0, 179, 255, 0.1), transparent 55%),
+              rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.contact-card-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.contact-card-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.25rem;
+}
+
+.email-button {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+  padding: 0.85rem 1.3rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #00ff88, #00b3ff);
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
 }
 
-.email-link {
+.email-button-left {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #00ff88;
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border: 2px solid rgba(0, 255, 136, 0.3);
-  border-radius: 12px;
-  background: rgba(0, 255, 136, 0.05);
-  transition: all 0.3s ease;
-  flex: 1;
+  gap: 0.75rem;
 }
 
-.email-link i {
-  font-size: 1.25rem;
-  color: #00ff88;
+.email-button-left i {
+  font-size: 1.15rem;
+  color: #000000;
   filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.5));
 }
 
-.email-link:hover {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.5);
+.email-button-right i {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.email-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 14px 40px rgba(0, 255, 136, 0.45);
+  filter: brightness(1.05);
 }
 
-.copy-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-  flex-shrink: 0;
-}
-
-.copy-button:hover {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.3);
-  color: #00ff88;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
-}
-
-.copy-button:active {
+.email-button:active {
   transform: translateY(0);
-}
-
-.copy-button i.fa-check {
-  color: #00ff88;
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
 }
 
 .social-links {
@@ -169,6 +191,306 @@
   transform: scale(1.1);
 }
 
+.resume-request {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 480px;
+}
+
+.resume-button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00ff88, #00b3ff);
+  color: #000000;
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.resume-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 255, 136, 0.45);
+  filter: brightness(1.05);
+}
+
+.resume-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+}
+
+.resume-note {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 360px;
+  text-align: center;
+}
+
+.resume-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.resume-label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.resume-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.resume-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.resume-input:focus {
+  border-color: rgba(0, 255, 136, 0.7);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.4);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.resume-submit-button {
+  align-self: flex-end;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 136, 0.6);
+  background: transparent;
+  color: #00ff88;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resume-submit-button:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+  transform: translateY(-1px);
+}
+
+.resume-submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 255, 136, 0.25);
+}
+
+.note-request {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.note-button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #00ff88, #00b3ff);
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.note-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 255, 136, 0.45);
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.note-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+}
+
+.note-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.note-label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.note-input,
+.note-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.note-textarea {
+  min-height: 160px;
+}
+
+.note-input::placeholder,
+.note-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.note-input:focus,
+.note-textarea:focus {
+  border-color: rgba(0, 255, 136, 0.7);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.4);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.note-submit-button {
+  align-self: flex-end;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 136, 0.6);
+  background: transparent;
+  color: #00ff88;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-submit-button:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+  transform: translateY(-1px);
+}
+
+.note-submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 255, 136, 0.25);
+}
+
+.note-compose {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.note-compose-inner {
+  width: 100%;
+  max-width: 900px;
+  padding: 1.75rem 1.5rem 2rem;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.08), transparent 55%),
+              radial-gradient(circle at bottom right, rgba(0, 179, 255, 0.1), transparent 55%),
+              rgba(10, 10, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+  text-align: left;
+}
+
+.note-compose-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 0.35rem;
+}
+
+.note-compose-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1rem;
+}
+
+.note-compose-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.note-cancel-button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.note-cancel-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.input-error {
+  border-color: rgba(255, 99, 132, 0.8) !important;
+  box-shadow: 0 0 0 1px rgba(255, 99, 132, 0.4);
+}
+
+.error-text {
+  width: 100%;
+  text-align: left;
+  margin: 0.15rem 0 0.3rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.8rem;
+  color: #ff6384;
+}
+
+.success-text {
+  width: 100%;
+  text-align: left;
+  margin: 0.4rem 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #00ff88;
+}
+
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -186,21 +508,24 @@
     margin-bottom: 3rem;
   }
 
-  .contact-email-wrapper {
+  .email-button {
+    font-size: 1.1rem;
+    padding: 0.875rem 1.25rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .contact-actions {
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
   }
 
-  .email-link {
-    font-size: 1.25rem;
-    padding: 0.875rem 1.5rem;
+  .contact-action {
     width: 100%;
-    justify-content: center;
   }
 
-  .copy-button {
-    width: 100%;
-    height: 48px;
+  .contact-card {
+    max-width: 100%;
   }
 
   .social-link {
