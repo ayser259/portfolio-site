@@ -21,7 +21,7 @@ const moreAboutYouConversation = {
     "I studied Management Sciences Engineering at the University of Waterloo, then did a Master of Engineering in Data Science at the University of Toronto.",
     "That mix of systems thinking and data shapes how I frame problems and make decisions.",
     "",
-    "Before Credit Karma, I co-founded a startup building an ML platform for businesses that rarely get access to modern data and AI tooling.",
+      "Before Credit Karma, I founded a startup building an ML platform for businesses that rarely get access to modern data and AI tooling.",
     "We shipped paid pilots and secured letters of intent, but I realized I’d spend more time pitching and recruiting than actually building product — so I made the hard call to shut it down and go deeper on product at scale.",
     "",
     "The common thread across all of this:",

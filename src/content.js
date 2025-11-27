@@ -71,9 +71,9 @@ const siteContent = {
 
   // Used by ContactSection for the contact CTA
   contact: {
-    title: "Let's Build Something Interesting",
+    title: "Let's build together",
     description:
-      'I’m open to senior product roles, advisory work, and ambitious side quests. If you’re tackling a hard problem in consumer finance, productivity, or AI, I’d love to talk.',
+      'I’m open to connecting over senior to principal IC product roles, seed and pre-seed investment opportunities, and startup advisory. If you’re tackling a hard problem in growth, systems, finance, productivity, or AI, I’d love to talk.',
     email: 'ayserchoudhury@gmail.com',
   },
 };
