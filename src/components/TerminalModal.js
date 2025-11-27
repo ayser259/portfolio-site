@@ -3,7 +3,7 @@ import './TerminalModal.css';
 import siteContent from '../content';
 import conversations from '../conversations';
 
-function TerminalModal({ isOpen, onOpen }) {
+function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
   const [displayedText, setDisplayedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const [isTypingComplete, setIsTypingComplete] = useState(false);
@@ -14,9 +14,9 @@ function TerminalModal({ isOpen, onOpen }) {
   const [currentMode, setCurrentMode] = useState('initial'); // 'initial' or 'conversation'
   const [currentMessages, setCurrentMessages] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
-  const [dragTranslateY, setDragTranslateY] = useState(0);
+  const [sheetState, setSheetState] = useState('default'); // 'max' | 'default' | 'min' (mobile only)
   const dragStartYRef = useRef(null);
-  const dragStartTranslateRef = useRef(0);
+  const dragDeltaRef = useRef(0);
   
   const messageIndexRef = useRef(0);
   const charIndexRef = useRef(0);
@@ -25,6 +25,7 @@ function TerminalModal({ isOpen, onOpen }) {
   const typingTimeoutRef = useRef(null);
   const isTypingCompleteRef = useRef(false);
   const hasInitializedRef = useRef(false);
+  const hasSignaledIntroCompleteRef = useRef(false);
 
   useEffect(() => {
     // Track if we're on a mobile-sized viewport
@@ -38,6 +39,15 @@ function TerminalModal({ isOpen, onOpen }) {
 
     return () => window.removeEventListener('resize', updateIsMobile);
   }, []);
+
+  // After intro completes and choice chips are shown, ensure the sheet is fully expanded
+  // on mobile so all chips are reachable via scrolling.
+  useEffect(() => {
+    if (!isMobile) return;
+    if (showChoiceChips) {
+      setSheetState('max');
+    }
+  }, [isMobile, showChoiceChips]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -80,9 +90,10 @@ function TerminalModal({ isOpen, onOpen }) {
     setSelectedChip(null);
     isTypingCompleteRef.current = false;
     hasInitializedRef.current = false;
+    hasSignaledIntroCompleteRef.current = false;
     setCurrentMode('initial');
     setCurrentMessages([]);
-    setDragTranslateY(0);
+    setSheetState('default');
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
@@ -150,6 +161,12 @@ function TerminalModal({ isOpen, onOpen }) {
     
     // Show appropriate UI after completion
     if (currentMode === 'initial') {
+      // Notify parent that intro has completed (once)
+      if (!hasSignaledIntroCompleteRef.current && typeof onIntroComplete === 'function') {
+        hasSignaledIntroCompleteRef.current = true;
+        onIntroComplete();
+      }
+
       setTimeout(() => {
         setShowChoiceChips(true);
       }, 500);
@@ -204,8 +221,8 @@ function TerminalModal({ isOpen, onOpen }) {
         setDisplayedText(typedTextRef.current);
         charIndexRef.current++;
         
-        // Varying typing speed - faster overall but still smooth
-        const baseSpeed = fastForwardMode ? 3 : Math.random() * 12 + 8;
+        // Typing speed - consistent and smooth
+        const baseSpeed = fastForwardMode ? 2 : 18;
         typingTimeoutRef.current = setTimeout(() => typeMessage(messagesToType), baseSpeed);
       } else {
         // Message complete, add line break and move to next
@@ -214,8 +231,8 @@ function TerminalModal({ isOpen, onOpen }) {
         charIndexRef.current = 0;
         messageIndexRef.current++;
         
-        // Pause between messages - shorter overall to keep flow snappy
-        const pauseSpeed = fastForwardMode ? 40 : 140;
+        // Pause between messages - slightly shorter to keep flow snappy
+        const pauseSpeed = fastForwardMode ? 20 : 90;
         typingTimeoutRef.current = setTimeout(() => typeMessage(messagesToType), pauseSpeed);
       }
     } else {
@@ -228,6 +245,12 @@ function TerminalModal({ isOpen, onOpen }) {
       
       // Handle completion based on mode
       if (currentMode === 'initial') {
+        // Notify parent that intro has completed (once)
+        if (!hasSignaledIntroCompleteRef.current && typeof onIntroComplete === 'function') {
+          hasSignaledIntroCompleteRef.current = true;
+          onIntroComplete();
+        }
+
         // Show choice chips after initial message
         setTimeout(() => {
           setShowChoiceChips(true);
@@ -366,9 +389,16 @@ function TerminalModal({ isOpen, onOpen }) {
   if (isMobile) {
     if (typeof window !== 'undefined') {
       const viewportHeight = window.innerHeight || 0;
-      const maxTranslate = viewportHeight * 0.4; // can be dragged down to ~40% of screen height
-      const clampedTranslate = Math.max(0, Math.min(dragTranslateY, maxTranslate));
-      modalStyle.transform = `translateY(${clampedTranslate}px)`;
+      const baseMax = 0; // full screen
+      const baseDefault = viewportHeight * 0.25; // below hero card
+      const baseMin = viewportHeight * 0.65; // small peek
+      // During intro (before choice chips), keep sheet in max state for stability
+      const effectiveState = showChoiceChips ? sheetState : 'max';
+
+      const translateY =
+        effectiveState === 'max' ? baseMax : effectiveState === 'default' ? baseDefault : baseMin;
+
+      modalStyle.transform = `translateY(${translateY}px)`;
     }
   }
 
@@ -377,7 +407,7 @@ function TerminalModal({ isOpen, onOpen }) {
     if (!event.touches || event.touches.length === 0) return;
     const touch = event.touches[0];
     dragStartYRef.current = touch.clientY;
-    dragStartTranslateRef.current = dragTranslateY;
+    dragDeltaRef.current = 0;
   };
 
   const handleGripTouchMove = (event) => {
@@ -387,29 +417,44 @@ function TerminalModal({ isOpen, onOpen }) {
 
     const touch = event.touches[0];
     const deltaY = touch.clientY - dragStartYRef.current;
-
-    if (typeof window === 'undefined') return;
-    const viewportHeight = window.innerHeight || 0;
-    const maxTranslate = viewportHeight * 0.4;
-    const nextTranslate = Math.max(
-      0,
-      Math.min(maxTranslate, dragStartTranslateRef.current + deltaY)
-    );
-    setDragTranslateY(nextTranslate);
+    dragDeltaRef.current = deltaY;
   };
 
   const handleGripTouchEnd = () => {
     if (!isMobile) return;
     if (typeof window === 'undefined') {
-      setDragTranslateY(0);
       return;
     }
 
-    const viewportHeight = window.innerHeight || 0;
-    const maxTranslate = viewportHeight * 0.4;
-    const shouldCollapse = dragTranslateY > maxTranslate * 0.5;
-    setDragTranslateY(shouldCollapse ? maxTranslate : 0);
+    const deltaY = dragDeltaRef.current || 0;
+    const threshold = 80; // px swipe threshold (larger so normal scrolls don't change state)
+
+    if (Math.abs(deltaY) < threshold) {
+      // Small movement – snap back to current state
+      dragStartYRef.current = null;
+      dragDeltaRef.current = 0;
+      return;
+    }
+
+    // Swipe up => move sheet up one state; swipe down => move down one state
+    if (deltaY < 0) {
+      // Up
+      setSheetState((prev) => {
+        if (prev === 'min') return 'default';
+        if (prev === 'default') return 'max';
+        return 'max';
+      });
+    } else {
+      // Down
+      setSheetState((prev) => {
+        if (prev === 'max') return 'default';
+        if (prev === 'default') return 'min';
+        return 'min';
+      });
+    }
+
     dragStartYRef.current = null;
+    dragDeltaRef.current = 0;
   };
 
   return (

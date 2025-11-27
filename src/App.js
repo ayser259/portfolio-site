@@ -15,12 +15,15 @@ import NotFoundPage from './pages/NotFoundPage';
 
 function HomePage() {
   const videoRef = useRef(null);
+  const heroOverlayRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAudioOn, setIsAudioOn] = useState(false);
+  const [hasIntroCompleted, setHasIntroCompleted] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const overlay = heroOverlayRef.current;
+    if (!video || !overlay) return;
 
     function updateVideoSize() {
       const viewportWidth = window.innerWidth;
@@ -33,6 +36,7 @@ function HomePage() {
         video.style.height = '100%';
         video.style.objectFit = 'cover';
         video.style.objectPosition = 'center center';
+        overlay.style.width = '100%';
       } else {
         // Desktop: video shrinks in width when modal opens from right
         const modalWidth = 700;
@@ -42,6 +46,7 @@ function HomePage() {
         video.style.height = '100%';
         video.style.objectFit = 'cover';
         video.style.objectPosition = 'left center';
+        overlay.style.width = `${videoWidth}px`;
       }
     }
     
@@ -111,6 +116,34 @@ function HomePage() {
     <div className="App">
       {/* Hero Section with Video Background */}
       <section className={`hero-section ${isModalOpen ? 'modal-open' : ''}`}>
+        {/* Hero Text Content */}
+        <div
+          className={`hero-overlay ${hasIntroCompleted ? 'hero-overlay-visible' : ''}`}
+          ref={heroOverlayRef}
+        >
+          <div className="hero-content">
+            <div className="hero-badge">Growth · Systems · Data · Gen AI</div>
+            <h1 className="hero-title">
+              <span className="text-primary">Ayser Choudhury</span>
+            </h1>
+            <div className="hero-actions">
+              <a href="#projects-showcase" className="btn btn-secondary">
+                View My Work
+              </a>
+              <a href="#contact" className="btn btn-primary">
+                Get In Touch
+              </a>
+              <button
+                type="button"
+                className="btn btn-tertiary"
+                onClick={() => setIsModalOpen((prev) => !prev)}
+              >
+                {isModalOpen ? 'Hide Conversation' : 'Learn About Me'}
+              </button>
+            </div>
+          </div>
+        </div>
+
         <video 
           id="bgVideo"
           ref={videoRef}
@@ -136,7 +169,11 @@ function HomePage() {
             className="audio-toggle-icon"
           />
         </button>
-        <TerminalModal isOpen={isModalOpen} onOpen={() => setIsModalOpen(true)} />
+        <TerminalModal
+          isOpen={isModalOpen}
+          onOpen={() => setIsModalOpen(true)}
+          onIntroComplete={() => setHasIntroCompleted(true)}
+        />
       </section>
       
       {/* Projects Showcase Section */}

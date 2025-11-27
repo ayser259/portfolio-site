@@ -87,6 +87,7 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   position: relative;
+  overscroll-behavior: contain;
 }
 
 .terminal-content::-webkit-scrollbar {
@@ -118,6 +119,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 .typing-cursor::after {
   content: '▊';
@@ -344,9 +346,7 @@
   
   .terminal-content {
     padding: 1.25rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    overscroll-behavior: contain;
   }
 
   .typed-text {
