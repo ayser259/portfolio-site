@@ -7,6 +7,44 @@ function SighedKickPage() {
   const navigate = useNavigate();
   const project = projectDetails['SighedKick'];
 
+   const screenshots = [
+    {
+      src: '/projects/Sighedkick/SighedKick-Library.png',
+      alt: 'SighedKick Prompt Library view',
+      caption: 'Prompt Library – my reusable prompts, patterns, and context snippets in one place.'
+    },
+    {
+      src: '/projects/Sighedkick/Sighedkick-Canvas1.png',
+      alt: 'SighedKick Canvas workspace',
+      caption: 'Canvas – AI-augmented workspace for drafting, rewriting, and structuring longer-form work.'
+    },
+    {
+      src: '/projects/Sighedkick/Sighedkick-Canvas2.png',
+      alt: 'SighedKick Canvas with analysis and drafts',
+      caption: 'Canvas in use to break down a complex thread and converge on a final draft.'
+    },
+    {
+      src: '/projects/Sighedkick/Sighedkick-Canvas3.png',
+      alt: 'SighedKick Canvas reply variants',
+      caption: 'Side-by-side variants to tune tone, structure, and emphasis before sending.'
+    },
+    {
+      src: '/projects/Sighedkick/SighedKick-SharePrompt.png',
+      alt: 'SighedKick prompt sharing view',
+      caption: 'Sharing a prompt as a reusable asset instead of a one-off message in chat.'
+    }
+  ];
+
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    if (url.includes('loom.com/share/')) {
+      return url.replace('/share/', '/embed/');
+    }
+    return url;
+  };
+
+  const demoEmbedUrl = getEmbedUrl(project.demoLink);
+
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
@@ -22,16 +60,55 @@ function SighedKickPage() {
         </div>
 
         <div className="project-detail-body">
-          {project.overview && (
-            <section className="project-detail-section">
-              <h2 className="project-detail-section-title">Overview</h2>
-              <div className="project-detail-text">
-                {project.overview.split('\n').map((paragraph, idx) => (
-                  <p key={idx}>{paragraph}</p>
-                ))}
-              </div>
-            </section>
-          )}
+          <div className="project-detail-layout">
+            <div className="project-detail-media-column">
+              {demoEmbedUrl && (
+                <section className="project-detail-media-section">
+                  <h2 className="project-detail-media-title">Walkthrough</h2>
+                  <div className="project-detail-video-wrapper">
+                    <iframe
+                      src={demoEmbedUrl}
+                      title="SighedKick product walkthrough"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                  <p className="project-detail-video-caption">
+                    A quick tour of how I actually use SighedKick day-to-day as my personal GenAI copilot.
+                  </p>
+                </section>
+              )}
+
+              {screenshots.length > 0 && (
+                <section className="project-detail-media-section project-detail-gallery">
+                  <h2 className="project-detail-media-title">Screens & Flows</h2>
+                  <div className="project-detail-gallery-grid">
+                    {screenshots.map((shot) => (
+                      <figure key={shot.src} className="project-detail-gallery-item">
+                        <img src={shot.src} alt={shot.alt} />
+                        {shot.caption && (
+                          <figcaption className="project-detail-gallery-caption">
+                            {shot.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+
+            <div className="project-detail-content-column">
+              {project.overview && (
+                <section className="project-detail-section">
+                  <h2 className="project-detail-section-title">Overview</h2>
+                  <div className="project-detail-text">
+                    {project.overview.split('\n').map((paragraph, idx) => (
+                      <p key={idx}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+              )}
 
           <div className="project-detail-meta">
             {project.type && (
@@ -68,7 +145,7 @@ function SighedKickPage() {
 
           {project.problem && (
             <section className="project-detail-section">
-              <h2 className="project-detail-section-title">The Problem</h2>
+              <h2 className="project-detail-section-title">The Problem & Spark</h2>
               <div className="project-detail-text">
                 {project.problem.split('\n').map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
@@ -106,7 +183,7 @@ function SighedKickPage() {
 
           {project.architecture && (
             <section className="project-detail-section">
-              <h2 className="project-detail-section-title">Architecture</h2>
+              <h2 className="project-detail-section-title">How It’s Built</h2>
               <div className="project-detail-text">
                 {project.architecture.split('\n').map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
@@ -128,7 +205,7 @@ function SighedKickPage() {
 
           {project.outcomes && (
             <section className="project-detail-section">
-              <h2 className="project-detail-section-title">Outcomes</h2>
+              <h2 className="project-detail-section-title">Impact</h2>
               <div className="project-detail-text">
                 {project.outcomes.split('\n').map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
@@ -142,6 +219,8 @@ function SighedKickPage() {
               <p className="project-detail-tagline-text">{project.tagline}</p>
             </section>
           )}
+            </div>
+          </div>
 
           {project.demoLink && (
             <div className="project-detail-actions">
@@ -151,7 +230,7 @@ function SighedKickPage() {
                 rel="noopener noreferrer"
                 className="project-detail-demo-link"
               >
-                View Demo →
+                Open full walkthrough in a new tab →
               </a>
             </div>
           )}

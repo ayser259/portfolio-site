@@ -15,6 +15,14 @@ function ProjectsShowcase() {
     'AI-Assisted PRD Workflow': 'PRDSystem'
   };
 
+  const projectImageMap = {
+    SighedKick: '/projects/Sighedkick/SighedKick-Library.png',
+    EmptyMyInbox: '/projects/EmptyMyInbox/EmptyMyInbox-Home.png',
+    ByteMe: '/projects/ByteMe/ByteMe-Dashboard1.png',
+    CKFD: null,
+    PRDSystem: null
+  };
+
   // Helper function to convert project key to URL slug
   const getProjectSlug = (projectKey) => {
     return projectKey.toLowerCase();
@@ -39,7 +47,8 @@ function ProjectsShowcase() {
         iconColor: summary.iconColor || project.iconColor,
         technologies: summary.technologies || project.technologies,
         projectKey: projectKey, // Store the key for modal lookup
-        projectSlug: getProjectSlug(projectKey) // URL slug for routing
+        projectSlug: getProjectSlug(projectKey), // URL slug for routing
+        thumbnail: projectImageMap[projectKey] || null
       };
     });
 
@@ -56,6 +65,16 @@ function ProjectsShowcase() {
               className="project-card"
               style={{ textDecoration: 'none', display: 'block' }}
             >
+              {project.thumbnail && (
+                <div className="project-card-media">
+                  <img
+                    src={project.thumbnail}
+                    alt={`${project.title} preview`}
+                    className="project-card-image"
+                  />
+                </div>
+              )}
+
               <div className="project-header">
                 <div className="project-icon">
                   <i className={`fas ${project.icon} ${project.iconColor || 'cyan-400'}`}></i>
