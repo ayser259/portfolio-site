@@ -110,11 +110,11 @@ function HomePage() {
     };
   }, [isModalOpen]);
 
-  // Open modal after 5 seconds
+  // Open modal after 0.5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsModalOpen(true);
-    }, 5000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -177,8 +177,7 @@ function HomePage() {
           loop 
           playsInline
         >
-          <source src="/assets/images/background/full_background_video.mov" type="video/mp4" />
-          <source src="/assets/images/background/full_background_video.mp4" type="video/mp4" />
+          <source src="/assets/images/background/background_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <button

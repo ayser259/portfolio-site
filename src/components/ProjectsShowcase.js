@@ -47,16 +47,16 @@ function ProjectsShowcase() {
   };
 
   const projectThemesMap = {
-    SighedKick: ['Gen AI', 'Systems', 'Workflows', 'Exploration', 'Software Engineering', 'Web', 'UX'],
-    EmptyMyInbox: ['Systems', 'Workflows', 'Software Engineering', 'UX', 'Mobile', 'Gen AI'],
-    ByteMe: ['Mobile', 'UX', 'Exploration', 'Software Engineering', 'Data Science'],
-    CKFD: ['Mobile', 'UX', 'Exploration', 'Gen AI', 'Workshops'],
-    PRDSystem: ['Gen AI', 'Workflows', 'Workshops'],
-    CanadianEconomy: ['Data Science', 'Exploration'],
-    Kakeibo: ['Mobile', 'UX', 'Exploration'],
-    UWEngineeringProgramClassifier: ['Data Science'],
-    UWPlacementQuiz: ['Software Engineering', 'UX', 'Web'],
-    MakingYourOwnCopilot: ['Workshops', 'Systems', 'Workflows', 'Gen AI']
+    SighedKick: ['Gen AI', 'Product Design & UX', 'Systems & Workflows', 'Prototypes'],
+    EmptyMyInbox: ['Gen AI', 'Product Design & UX', 'Systems & Workflows', 'Prototypes'],
+    ByteMe: ['Product Design & UX', 'Prototypes', 'Data & Insights'],
+    CKFD: ['Gen AI', 'Product Design & UX', 'Prototypes', 'Workshops'],
+    PRDSystem: ['Gen AI', 'Systems & Workflows', 'Workshops'],
+    CanadianEconomy: ['Data & Insights'],
+    Kakeibo: ['Product Design & UX'],
+    UWEngineeringProgramClassifier: ['Data & Insights'],
+    UWPlacementQuiz: ['Product Design & UX'],
+    MakingYourOwnCopilot: ['Gen AI', 'Systems & Workflows', 'Workshops']
   };
 
   // Helper function to convert project key to URL slug
@@ -98,11 +98,31 @@ function ProjectsShowcase() {
 
   const [selectedThemes, setSelectedThemes] = useState([]);
 
+  // Define the desired theme order
+  const themeOrder = [
+    'Gen AI',
+    'Product Design & UX',
+    'Systems & Workflows',
+    'Prototypes',
+    'Workshops',
+    'Data & Insights'
+  ];
+
   const allThemes = Array.from(
     new Set(
       allProjects.flatMap((project) => project.themes || [])
     )
-  ).sort();
+  ).sort((a, b) => {
+    const indexA = themeOrder.indexOf(a);
+    const indexB = themeOrder.indexOf(b);
+    // If both are in the order array, sort by their position
+    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+    // If only one is in the order array, prioritize it
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    // If neither is in the order array, maintain alphabetical
+    return a.localeCompare(b);
+  });
 
   const toggleTheme = (theme) => {
     setSelectedThemes((prev) =>
