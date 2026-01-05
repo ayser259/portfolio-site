@@ -279,12 +279,12 @@ function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
 
   const allChoiceChips = [
     { id: 'aboutWork', label: 'Tell me more about you', prompt: 'Tell me more about you' },
+    { id: 'genai', label: 'What experience do you have with Gen AI?', prompt: 'What experience do you have with Gen AI?' },
+    { id: 'growth', label: "What's your experience with driving growth?", prompt: "What's your experience with driving growth?" },
+    { id: 'systems', label: "What's your experience with building systems?", prompt: "What's your experience with building systems?" },
+    { id: 'projects', label: 'What do you build outside of work?', prompt: 'What do you build outside of work?' },
     { id: 'outsideWork', label: 'Tell me about life outside of work', prompt: 'Tell me about life outside of work' },
-    { id: 'systems', label: 'Experience with building systems', prompt: 'Tell me about your experience with building systems' },
-    { id: 'growth', label: 'Experience with working on growth', prompt: 'Tell me about your experience with growth and experimentation' },
-    { id: 'genai', label: 'Experience with Gen AI', prompt: 'Tell me about your experience with Gen AI' },
-    { id: 'projects', label: 'What about your side projects?', prompt: 'What about your side projects?' },
-    { id: 'viewProjects', label: 'Show all projects', prompt: 'Show me all of your projects' },
+    { id: 'viewProjects', label: 'Show me a few projects', prompt: 'Show me a few projects' },
     { id: 'contact', label: 'Contact me', prompt: 'Contact me' }
   ];
 
@@ -494,14 +494,11 @@ function TerminalModal({ isOpen, onOpen, onIntroComplete }) {
                 onClick={skipTyping}
                 aria-label="Answer now"
               >
-                <span className="skip-icon">
-                  <img 
-                    src="/assets/images/skip.png" 
-                    alt="Answer now" 
-                    className="skip-icon-image"
-                  />
-                </span>
-                <span className="skip-text">Answer now</span>
+                <img 
+                  src="/assets/images/fastforward.png" 
+                  alt="Answer now" 
+                  className="skip-icon-image"
+                />
               </button>
             </div>
           )}
