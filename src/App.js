@@ -110,11 +110,11 @@ function HomePage() {
     };
   }, [isModalOpen]);
 
-  // Open modal after 5 seconds
+  // Open modal after 0.5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsModalOpen(true);
-    }, 5000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);

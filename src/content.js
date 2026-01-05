@@ -13,7 +13,7 @@ const siteContent = {
       '',
       "Hi, I'm Ayser 👋",
       '',
-      "I'm a Product Lead and builder based in San Francisco, CA.",
+      "I'm a Product Lead and Builder based in San Francisco, CA.",
       '',
       'This site is a snapshot of who I am, how I think, what I build, and what I like.',
       '',
