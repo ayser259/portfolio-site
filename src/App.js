@@ -177,8 +177,7 @@ function HomePage() {
           loop 
           playsInline
         >
-          <source src="/assets/images/background/full_background_video.mov" type="video/mp4" />
-          <source src="/assets/images/background/full_background_video.mp4" type="video/mp4" />
+          <source src="/assets/images/background/background_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <button
