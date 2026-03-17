@@ -21,7 +21,6 @@ import NotFoundPage from './pages/NotFoundPage';
 
 function HomePage() {
   const videoRef = useRef(null);
-  const heroOverlayRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAudioOn, setIsAudioOn] = useState(false);
   const [hasIntroCompleted, setHasIntroCompleted] = useState(false);
@@ -46,52 +45,35 @@ function HomePage() {
 
   useEffect(() => {
     const video = videoRef.current;
-    const overlay = heroOverlayRef.current;
-    if (!video || !overlay) return;
+    if (!video) return;
 
-    function updateVideoSize() {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+    function updateVideoPresentation() {
       const isMobile = window.innerWidth <= 768;
-      
-      if (isMobile) {
-        // Mobile: video stays full width/height
-        video.style.width = '100%';
-        video.style.height = '100%';
-        video.style.objectFit = 'cover';
-        video.style.objectPosition = 'center center';
-        overlay.style.width = '100%';
-      } else {
-        // Desktop: video shrinks in width when modal opens from right
-        const modalWidth = 700;
-        const videoWidth = isModalOpen ? viewportWidth - modalWidth : viewportWidth;
-        
-        video.style.width = `${videoWidth}px`;
-        video.style.height = '100%';
-        video.style.objectFit = 'cover';
-        video.style.objectPosition = 'left center';
-        overlay.style.width = `${videoWidth}px`;
-      }
+
+      video.style.width = '100%';
+      video.style.height = '100%';
+      video.style.objectFit = 'cover';
+      video.style.objectPosition = isMobile ? 'center center' : 'left center';
     }
     
     // Update size when video metadata loads
-    video.addEventListener('loadedmetadata', updateVideoSize);
-    video.addEventListener('loadeddata', updateVideoSize);
+    video.addEventListener('loadedmetadata', updateVideoPresentation);
+    video.addEventListener('loadeddata', updateVideoPresentation);
     
     // Update on resize
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(updateVideoSize, 50);
+      resizeTimeout = setTimeout(updateVideoPresentation, 50);
     };
     window.addEventListener('resize', handleResize);
     
     // Initial update
-    updateVideoSize();
+    updateVideoPresentation();
     
     // Fallback updates
-    setTimeout(updateVideoSize, 100);
-    setTimeout(updateVideoSize, 500);
+    setTimeout(updateVideoPresentation, 100);
+    setTimeout(updateVideoPresentation, 500);
     
     // Ensure video plays
     video.play().catch(error => {
@@ -105,10 +87,10 @@ function HomePage() {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      video.removeEventListener('loadedmetadata', updateVideoSize);
-      video.removeEventListener('loadeddata', updateVideoSize);
+      video.removeEventListener('loadedmetadata', updateVideoPresentation);
+      video.removeEventListener('loadeddata', updateVideoPresentation);
     };
-  }, [isModalOpen]);
+  }, []);
 
   // Open modal after 0.5 seconds
   useEffect(() => {
@@ -143,7 +125,6 @@ function HomePage() {
         {/* Hero Text Content */}
         <div
           className={`hero-overlay ${hasIntroCompleted ? 'hero-overlay-visible' : ''}`}
-          ref={heroOverlayRef}
         >
           <div className="hero-content">
             <div className="hero-badge">Growth · Systems · Data · Gen AI</div>
@@ -228,7 +209,8 @@ function AppRoutes() {
         <Route path="/makingyourowncopilot" element={<MakingYourOwnCopilotPage />} />
         <Route path="/portfolio" element={<Navigate to="/" replace />} />
         <Route path="/portfolio/*" element={<Navigate to="/" replace />} />
-        <Route path="*" element={<NotFoundPage />} />
+        {/* Any superfluous/unknown route should land on home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

@@ -5,32 +5,26 @@ const projectsConversation = {
   id: 'projects',
   title: 'All Projects',
   messages: [
+    "I almost always have a few side projects in rotation. It’s how I keep my execution muscles sharp.",
     "",
-    "I almost always have a few side projects in rotation.",
+    "As a PM with a background in data science and engineering, I love building end-to-end. It lets me feel real user pain myself and helps me evolve my POV on what actually matters.",
     "",
-    "As a PM with a data science and engineering background, I like building things end-to-end: it keeps my execution muscles sharp, lets me feel real user pain myself, and helps me evolve my POV on what actually matters.",
+    "When I’m toying with an idea, I’ll 'vibe code' a prototype to feel out the UX before I commit to anything deeper.",
     "",
-    "When I’m toying with an idea, I’ll often vibe code a prototype to feel out how it might work end-to-end, then put it in front of people to get feedback before I commit to anything deeper.",
+    "At home, that’s looked like:",
     "",
-    "Sometimes those scrappy builds turn into tools I wish existed for myself — like inbox cleaners, tone-shifting assistants, or prompt organizers that make Gen AI actually usable. Sometimes they’re just excuses to play with new stacks, APIs, or interaction patterns.",
+    "• SighedKick — My personal GenAI lab where I explore use-case-specific UX patterns and applied AI workflows.",
     "",
-    "At work, that’s looked like:",
-    "  • Future feed demo apps — lightweight prototypes I’ve used to rally folks around where CK’s Discovery/feed could go next.",
+    "• EmptyMyInbox — An iOS app for managing inbox overload. I built it as a playground to explore agentic experiences and get to inbox zero.",
     "",
-    "At home:",
-    "  • SighedKick — my personal copilot and playground for exploring Gen AI UX patterns and workflows.",
-    "  • EmptyMyInbox — an actually useful tool that helps me get to inbox zero and stay there.",
+    "I bring that same prototype-first energy to work, too.",
     "",
-    "My process usually looks like:",
-    "  • tear down existing products in the space,",
-    "  • map how different teams frame the same problem,",
-    "  • then build my own take from systems → UX → messaging.",
+    "At Credit Karma, I’ve built 'Future Feed' demo apps—lightweight prototypes used to rally stakeholders around where our Discovery surfaces should go next.",
     "",
-    "You’ll find a mix of these projects on this site — some polished, some obviously v0.1 — all representative of how I think and build for fun.",
-    ""
+    "My process is pretty consistent: I tear down existing products, map how different teams frame the same problem, and then build my own take from systems → UX → messaging.",
+    "",
+    "You’ll find a mix of these projects on this site. Some are polished, some are obviously v0.1—but they all represent how I think and build for fun."
   ]
-  
-  
 };
 
 export default projectsConversation;

@@ -2,25 +2,20 @@ const outsideOfWorkConversation = {
   id: 'outside-work',
   title: 'Life Outside of Work',
   messages: [
+    "Outside of work, I’m usually falling in love with a new problem or a new story.",
     "",
-    "Outside of work, I mostly like trying new things and falling in love with new problems.",
+    "I’ve been (slowly) writing a novel for the last few years. It’s mostly world-building right now—noodling on systems and lore that are still miles away from a first draft.",
     "",
-    "I write (slowly) — mostly world-building and noodling on a novel that’s still miles away from a first draft.",
+    "My media diet leans the same way: deep fiction, complex world-building, and niche YouTube deep-dives. My TikTok, however, is pure pop-culture brain rot.",
     "",
-    "I’m big on board games — that’s actually how I met my partner — and I love trivia nights even though my friends usually have to carry me.",
+    "I’m big on board games—it’s actually how I met my partner—and I’m a regular at trivia nights, even if my friends usually have to carry the team.",
     "",
-    "I love traveling and finding good food along the way — ideally somewhere we can linger, people-watch, and swap stories for a few hours.",
+    "I’m also an ordained minister. I’ve officiated three weddings for close friends, which probably tells you everything you need to know about how much I value my relationships.",
     "",
-    "My reading and TV diet leans toward fiction with a deep appreciation for world-building and a good script or story.",
-    "My YouTube history is niche deep dives and stories about people’s lives; my TikTok is pure pop-culture brain rot.",
+    "I barely post on social media; I’d much rather grab dinner or FaceTime than catch up via an Instagram story.",
     "",
-    "I barely post on social media — I’m much more of a consumer than a poster.",
-    "If we’re close, I’d rather grab dinner or FaceTime than catch up via stories.",
-    "",
-    "I’m also an ordained minister and have officiated three weddings for close friends — which probably tells you most of what you need to know about how seriously I take my relationships.",
-    ""
+    "Ideally, I’m somewhere new, traveling, people-watching, and swapping stories over a long meal that lingers for hours."
   ]
-  
 };
 
 export default outsideOfWorkConversation;

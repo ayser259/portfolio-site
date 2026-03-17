@@ -5,23 +5,22 @@ const genaiConversation = {
   id: 'genai',
   title: 'Gen AI Experience',
   messages: [
+    "AI has fundamentally shifted my role from manual execution to high-level orchestration.",
     "",
-    "I’ve been building with Gen AI both at work and for fun.",
+    "By automating the 'heads-down' solo work that used to eat my day, I’m executing significantly faster.",
     "",
-    "On the side, I tinker with tools that make my life easier — from a home assistant wired into ChatGPT to 'vibe coded' copilots that help me ship side projects faster.",
+    "That reclaimed time is my competitive advantage. It lets me lean into my superpowers: collaborating deeply with my team to deconstruct complex problems while using AI to strengthen my technical foundations.",
     "",
-    "At Intuit - Credit Karma, I spearheaded the creation of Intuit’s first Gen AI product copilot — a tool that helps PMs, designers, and builders turn rough ideas and messy research into clear, testable artifacts.",
-    "It’s now part of our standard product rituals.",
+    "I’ve brought that same 'AI-native' philosophy to my work at Intuit/Credit Karma.",
     "",
-    "I’ve also run cross-org workshops on how to build your own Gen AI copilot, helping teams think through prompts and UX flows so they can bring AI into their own products and how to leverage Gen AI to level up their own work.",
+    "I spearheaded the creation of our first Gen AI product copilot—a tool that helps PMs and designers turn messy research into clear, testable artifacts. It’s now a core part of our standard product rituals.",
     "",
-    "Short version: I’m comfortable taking a vague problem and figuring out how to build and design it in an AI-native way — and knowing when not to.",
-    "I like upleveling the people around me to use the best tools available so we can all crush it together.",
-    ""
+    "I also run cross-org workshops to help teams rethink their UX flows for an AI-first world. I love upleveling the people around me so we can all move at the same speed.",
+    "",
+    "In my private life, this has turned me into a prolific creator. I’ve built a suite of 'vibe coded' productivity apps—from custom email inboxes to task managers—that actually fit my brain.",
+    "",
+    "Short version: I’m no longer just a user of tools; I’m the architect of my own efficiency. I know exactly how to build in an AI-native way—and, just as importantly, I know when not to."
   ]
-  
-  
-  
 };
 
 export default genaiConversation;
