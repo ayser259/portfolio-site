@@ -5,24 +5,22 @@ const growthConversation = {
   id: 'growth',
   title: 'Growth & Experiments',
   messages: [
+    "I love growth work because it forces a rare kind of clarity: what are we trying to move, and did we actually move it?",
     "",
-    "I like growth work because it forces clarity: what are we trying to move, and did we actually move it?",
+    "I first caught the bug at Wish, building models to kill leaked promo codes before they torched our margins. It was my first intro to moving metrics by combining systems, code, and UX.",
     "",
-    "I first got into growth at Wish, where I worked on user acquisition and coupon abuse.",
-    "I built models to spot when promo codes leaked to Honey and killed them before they torched margin.",
-    "It was my intro to moving metrics with systems, code, and UX.",
+    "I brought that 'fix-the-system' mindset to Credit Karma when I built a growth pod from scratch for our main Discovery surface.",
     "",
-    "At Credit Karma, I jumped back into growth and led a growth-focused operating pod around our main Discovery surface in the App.",
+    "At the time, the redesign was deep in the red on revenue. It was a massive headwind.",
     "",
-    "When I stepped in, the redesign was deep in the red (~-35% revenue to scale).",
-    "We used instrumentation, experiments, UX changes, and platform improvements to pull it out of the hole, then reused the same playbook to help drive back-to-back record revenue in FY24 and FY25, plus the biggest MAU gains since the mobile app first launched.",
+    "I stood up a high-velocity engine—shipping 90+ experiments across 23 features in a single year.",
     "",
-    "My POV: good growth isn’t just surface-level A/B tests.",
-    "It’s systems, incentives, and UX working together around a clear problem and metric.",
-    ""
+    "By scaling experiment volume 4x, we compounded our impact 6x and turned that negativitity into a sustained positive return.",
+    "",
+    "That engine ultimately delivered over $200M in incremental impact, driving back-to-back record revenue in FY24, FY25 and FY26, plus the biggest MAU gains since the mobile app first launched.",
+    "",
+    "My POV: Good growth isn’t just surface-level A/B tests. It’s a high-cadence machine where systems, incentives, and UX all pull in the same direction."
   ]
-  
-
 };
 
 export default growthConversation;

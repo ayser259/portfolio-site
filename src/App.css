@@ -50,7 +50,9 @@ body {
   transform: translateY(-24px);
   pointer-events: none;
   transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1),
-    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: opacity, transform, width;
 }
 
 .hero-overlay-visible {
@@ -177,9 +179,10 @@ body {
   display: block;
   margin: 0;
   padding: 0;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-              height 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-section .audio-toggle {
@@ -203,6 +206,12 @@ body {
 .hero-section.modal-open .audio-toggle {
   /* Modal width is ~700px; keep the button 16px inside the video edge */
   right: 716px;
+}
+
+@media (min-width: 769px) {
+  .hero-section.modal-open .hero-overlay {
+    width: calc(100% - 700px);
+  }
 }
 
 .audio-toggle-icon {
@@ -235,6 +244,7 @@ body {
     align-items: flex-start;
     padding: 16px 16px 0;
     height: auto;
+    width: 100%;
   }
 
   .hero-content {

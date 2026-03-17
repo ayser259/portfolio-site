@@ -2,34 +2,22 @@ const moreAboutYouConversation = {
   id: 'about-work',
   title: 'More About Me',
   messages: [
+    "I specialize in building 0→1 systems that connect users to value and scale for compounding growth.",
     "",
-    "Let's zoom in on the work side.",
+    "That usually means working across the entire stack—from data and models to the final interface and interaction.",
     "",
-    "Day-to-day, I'm the Product Lead on Discovery at Credit Karma, improving how 140M+ members find value across our ecosystem.",
+    "My lens is technical: I studied Engineering at Waterloo and did a Masters in Data Science at UofT. That 'systems-first' approach shapes how I tackle every product problem.",
     "",
-    "By night I'm a tinkerer, vibe coder, and wannabe writer, so the line between \"work\" and \"side project\" is pretty blurry.",
+    "I actually tried to build those systems from scratch as an AI founder. I shipped pilots and secured LOIs, but I eventually realized I wanted to spend more time building product and less time pitching.",
     "",
-    "Most of my career has been spent on hard, high-leverage problems around helping people find value at scale.",
-    "On the Discovery side, that’s meant designing systems and surfaces that actually change how members navigate and what they unlock.",
+    "I made the hard call to shut it down so I could go deep on product at scale.",
     "",
-    "I tend to work at the intersection of:",
-    "  • growth (what are we trying to move and why?),",
-    "  • systems (what needs to exist under the hood?),",
-    "  • UX (how does this show up for real humans?).",
+    "That’s what led me to Credit Karma. As the Product Lead for Discovery, I’ve focused on reversing MAU decline for 120M+ users and delivering over $200M in impact.",
     "",
-    "My background leans technical.",
-    "I studied Management Sciences Engineering at the University of Waterloo, then did a Master of Engineering in Data Science at the University of Toronto.",
-    "That mix of systems thinking and data shapes how I frame problems and make decisions.",
+    "I’m 'AI-native' by practice, so even when I’m off the clock, I’m a builder, tinkerer and vibe coder.",
     "",
-      "Before Credit Karma, I founded a startup building an ML platform for businesses that rarely get access to modern data and AI tooling.",
-    "We shipped paid pilots and secured letters of intent, but I realized I’d spend more time pitching and recruiting than actually building product — so I made the hard call to shut it down and go deeper on product at scale.",
-    "",
-    "The common thread across all of this:",
-    "I like being dropped into ambiguous spaces, mapping the system, aligning on the real problem, and then building the products and primitives that move the metrics that matter.",
-    ""
+    "I love being dropped into messy, ambiguous spaces, mapping the system, and then building the primitives that move the metrics that matter."
   ]
-  
-  
 };
 
 export default moreAboutYouConversation;
