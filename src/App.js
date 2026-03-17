@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import './App.css';
 import TerminalModal from './components/TerminalModal';
 import ProjectsShowcase from './components/ProjectsShowcase';
@@ -226,6 +226,8 @@ function AppRoutes() {
         <Route path="/uwengineeringprogramclassifier" element={<UWEngineeringProgramClassifierPage />} />
         <Route path="/uwplacementquiz" element={<UWPlacementQuizPage />} />
         <Route path="/makingyourowncopilot" element={<MakingYourOwnCopilotPage />} />
+        <Route path="/portfolio" element={<Navigate to="/" replace />} />
+        <Route path="/portfolio/*" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
